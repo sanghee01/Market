@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 const Nav = ({ categories, filterItem, onSearch }) => {
   const [text, setText] = useState("");
+  const navigate = useNavigate();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    onSearch(text);
-    setText("");
-  };
+  const onSearchItem = useCallback(
+    (e) => {
+      e.preventDefault();
+      onSearch(text);
+      setText("");
+    },
+    [onSearch, text]
+  );
+
+  const onMain = useCallback(() => {
+    filterItem("전체보기");
+    navigate("/");
+  }, [filterItem, navigate]);
 
   return (
     <NavBar>
       <NavHeader>
-        <Logo src="assets/img/logo.png" alt="logo" />
+        <Logo src="assets/img/logo.png" alt="logo" onClick={onMain} />
         <NavBtnWrap>
           {categories.map((category, index) => {
             return (
@@ -22,7 +32,7 @@ const Nav = ({ categories, filterItem, onSearch }) => {
             );
           })}
         </NavBtnWrap>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSearchItem}>
           <NavInput
             type="text"
             value={text}
@@ -51,17 +61,17 @@ const NavHeader = styled.div`
 
 const Logo = styled.img`
   height: 40px;
+  cursor: pointer;
 `;
 
 const NavBtnWrap = styled.div`
   display: flex;
-
   align-items: center;
 `;
 
 const NavBtn = styled.div`
   color: #4b4b4b;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   text-transform: capitalize;
   display: block;
   padding: 0 1rem;

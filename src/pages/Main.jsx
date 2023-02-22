@@ -10,7 +10,6 @@ const allCategories = [
 
 const Main = () => {
   const [items, setItems] = useState(itemData);
-  const [categories, setCategories] = useState(allCategories);
 
   const filterItem = (category) => {
     if (category === "전체보기") {
@@ -29,13 +28,13 @@ const Main = () => {
   };
 
   return (
-    <div>
+    <MainContainer>
       <Nav
         categories={allCategories}
         filterItem={filterItem}
         onSearch={onSearch}
       />
-      <div>
+      <Itemcontainer>
         {items.map((item) => {
           const { id, title, img, desc, price, category } = item;
           return (
@@ -44,22 +43,36 @@ const Main = () => {
               <div>
                 <header>
                   <h4>{title}</h4>
-                  <h4>{price}</h4>
                 </header>
+                <h4>{price}</h4>
                 <p>{category}</p>
               </div>
             </article>
           );
         })}
-      </div>
-    </div>
+      </Itemcontainer>
+    </MainContainer>
   );
 };
 
-const ItemImg = styled.img`
-  height: 200px;
-  width: 300px;
+const MainContainer = styled.div`
+  background-color: #fffafa;
+`;
 
+const Itemcontainer = styled.div`
+  width: 80vw;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 80px 30px;
+  justify-items: center;
+`;
+
+const ItemImg = styled.img`
+  height: 280px;
+  width: 100%;
+  border-radius: 10px;
   display: block;
 `;
 
