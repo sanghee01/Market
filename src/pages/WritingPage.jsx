@@ -1,5 +1,5 @@
-import WritingInput from "../components/WritingInput";
-import { RxCross1 } from "react-icons/rx";
+import WritingInput from '../components/write/WritingInput';
+import { RxCross1 } from 'react-icons/rx';
 
 const WritingPage = () => {
   return (
