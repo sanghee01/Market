@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Nav from "../components/Nav";
+import Nav from "../components/main/Nav";
+
 import { itemData } from "../data";
 
 const allCategories = [
@@ -26,30 +27,32 @@ const Main = () => {
   };
 
   return (
-    <MainContainer>
-      <Nav
-        categories={allCategories}
-        filterItem={filterItem}
-        onSearch={onSearch}
-      />
-      <Itemcontainer>
-        {items.map((item) => {
-          const { id, title, img, desc, price, category } = item;
-          return (
-            <article key={id}>
-              <ItemImg src={img} alt={title} />
-              <div>
-                <header>
-                  <h4>{title}</h4>
-                </header>
-                <h4>{price}</h4>
-                <p>{category}</p>
-              </div>
-            </article>
-          );
-        })}
-      </Itemcontainer>
-    </MainContainer>
+    <div>
+      <MainContainer>
+        <Nav
+          categories={allCategories}
+          filterItem={filterItem}
+          onSearch={onSearch}
+        />
+        <Itemcontainer>
+          {items.map((item) => {
+            const { id, title, img, desc, price, category } = item;
+            return (
+              <article key={id}>
+                <ItemImg src={img} alt={title} />
+                <div>
+                  <header>
+                    <h4>{title}</h4>
+                  </header>
+                  <h4>{price}</h4>
+                  <p>{category}</p>
+                </div>
+              </article>
+            );
+          })}
+        </Itemcontainer>
+      </MainContainer>
+    </div>
   );
 };
 const MainContainer = styled.div`

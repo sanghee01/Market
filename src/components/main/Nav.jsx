@@ -37,11 +37,17 @@ const Nav = ({ categories, filterItem, onSearch }) => {
           <NavInput
             type="text"
             value={text}
-            placeholder={"물품을 검색해보세요ㅇㅅㅇ"}
+            placeholder={"물품을 검색해보세요"}
             onChange={(e) => setText(e.target.value)}
           />
-          <button type="submit">검색</button>
+          <NavInputBtn type="submit">검색하기</NavInputBtn>
         </form>
+        <div>
+          <span>OO님 환영합니다</span>
+        </div>
+        <div>
+          <button>로그아웃</button>
+        </div>
       </NavHeader>
     </NavBar>
   );
@@ -55,7 +61,7 @@ const NavHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 1rem 200px;
+  padding: 1rem 120px;
 `;
 
 const Logo = styled.img`
@@ -79,6 +85,26 @@ const NavBtn = styled.div`
   font-weight: bold;
 `;
 const NavInput = styled.input`
-  width: 250px;
+  width: 230px;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  padding-left: 20px;
+  margin-left: 50px;
+  margin-right: 10px;
+  background-color: #f1f2f2;
+  :focus {
+    outline: none;
+  }
+`;
+
+const NavInputBtn = styled.button`
+  background-color: white;
+  width: 80px;
+  height: 40px;
+  border: 0.1px solid lightgray;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
 `;
 export default Nav;
