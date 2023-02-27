@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Nav from '../components/main/Nav';
+import { DataContext } from '../App';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { itemData } from '../data';
 import MainItem from './MainItem';
 
-const allCategories = [
-  '전체보기',
-  ...new Set(itemData.map((item) => item.category)),
-];
-
 const Main = () => {
-  const [items, setItems] = useState(itemData);
+  const { data } = useContext(DataContext);
+  const [items, setItems] = useState(data);
   const sortId = items.sort((a, b) => b.id - a.id);
+
+  console.log(data);
+  const allCategories = [
+    '전체보기',
+    ...new Set(data.map((item) => item.category)),
+  ];
 
   const filterItem = (category) => {
     if (category === '전체보기') {
-      setItems(itemData);
+      setItems(data);
     } else {
-      setItems(itemData.filter((item) => item.category === category));
+      setItems(data.filter((item) => item.category === category));
     }
   };
   const onSearch = (text) => {
     setItems(
-      itemData.filter((item) =>
+      data.filter((item) =>
         item.title.toLowerCase().includes(text.toLowerCase())
       )
     );
