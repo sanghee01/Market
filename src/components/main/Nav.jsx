@@ -19,6 +19,7 @@ const Nav = ({ categories, filterItem, onSearch }) => {
 
   const onMain = useCallback(() => {
     filterItem('전체보기');
+    setBtnIndex(0);
     navigate('/');
   }, [filterItem, navigate]);
 
