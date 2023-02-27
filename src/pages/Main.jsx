@@ -1,26 +1,31 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Nav from "../components/main/Nav";
-
-import { itemData } from "../data";
-
-const allCategories = [
-  "전체보기",
-  ...new Set(itemData.map((item) => item.category)),
-];
+import React, { useContext, useState } from 'react';
+import styled from 'styled-components';
+import Nav from '../components/main/Nav';
+import { DataContext } from '../App';
+import { AiOutlinePlus } from 'react-icons/ai';
+import MainItem from './MainItem';
 
 const Main = () => {
-  const [items, setItems] = useState(itemData);
+  const { data } = useContext(DataContext);
+  const [items, setItems] = useState(data);
+  const sortId = items.sort((a, b) => b.id - a.id);
+
+  console.log(data);
+  const allCategories = [
+    '전체보기',
+    ...new Set(data.map((item) => item.category)),
+  ];
+
   const filterItem = (category) => {
-    if (category === "전체보기") {
-      setItems(itemData);
+    if (category === '전체보기') {
+      setItems(data);
     } else {
-      setItems(itemData.filter((item) => item.category === category));
+      setItems(data.filter((item) => item.category === category));
     }
   };
   const onSearch = (text) => {
     setItems(
-      itemData.filter((item) =>
+      data.filter((item) =>
         item.title.toLowerCase().includes(text.toLowerCase())
       )
     );
@@ -34,45 +39,48 @@ const Main = () => {
           filterItem={filterItem}
           onSearch={onSearch}
         />
-        <Itemcontainer>
-          {items.map((item) => {
-            const { id, title, img, desc, price, category } = item;
-            return (
-              <article key={id}>
-                <ItemImg src={img} alt={title} />
-                <div>
-                  <header>
-                    <h4>{title}</h4>
-                  </header>
-                  <h4>{price}</h4>
-                  <p>{category}</p>
-                </div>
-              </article>
-            );
-          })}
-        </Itemcontainer>
+        <MainItem items={items} />
+        <NewBtnContainer>
+          <NewBtn>
+            <AiOutlinePlus />
+          </NewBtn>
+        </NewBtnContainer>
       </MainContainer>
+      <Footer>
+        Copyright 2023. JSCODE Team Project - Market. All rights reserved.
+      </Footer>
     </div>
   );
 };
 const MainContainer = styled.div`
   background-color: #fffafa;
+  padding-top: 80px;
+  padding-bottom: 30px;
 `;
 
-const Itemcontainer = styled.div`
-  width: 80vw;
-  margin: 0 auto;
-  margin-top: 80px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 80px 30px;
-  justify-items: center;
+const NewBtnContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  position: sticky;
+  bottom: 30px;
 `;
 
-const ItemImg = styled.img`
-  height: 280px;
-  width: 100%;
-  border-radius: 10px;
-  display: block;
+const NewBtn = styled.button`
+  background-color: #00b493;
+  padding: 15px 20px;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  margin-right: 30px;
+  cursor: pointer;
+`;
+
+const Footer = styled.footer`
+  display: flex;
+  height: 80px;
+  border-top: 1px solid #ececec;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
 `;
 export default Main;
