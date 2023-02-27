@@ -40,8 +40,8 @@ const ItemArticle = styled.article`
 
 const ItemImg = styled.img`
   height: 280px;
-  width: 100%;
-  object-fit: cover;
+  width: 300px;
+  background-size: contain;
   border-radius: 10px;
   margin-bottom: 10px;
   display: block;
@@ -50,7 +50,7 @@ const ItemImg = styled.img`
 
 const Category = styled.p`
   font-size: 0.9rem;
-  color: gray;
+  color: #545353;
 `;
 
 export default MainItem;

@@ -37,12 +37,12 @@ const Main = () => {
           filterItem={filterItem}
           onSearch={onSearch}
         />
+        <MainItem items={items} />
         <NewBtnContainer>
           <NewBtn>
-            <AiOutlinePlus /> 내 상품 등록하기
+            <AiOutlinePlus />
           </NewBtn>
         </NewBtnContainer>
-        <MainItem items={items} />
       </MainContainer>
       <Footer>
         Copyright 2023. JSCODE Team Project - Market. All rights reserved.
@@ -53,21 +53,23 @@ const Main = () => {
 const MainContainer = styled.div`
   background-color: #fffafa;
   padding-top: 80px;
+  padding-bottom: 30px;
 `;
 
 const NewBtnContainer = styled.div`
   display: flex;
-  justify-content: right;
-  padding-top: 15px;
-  padding-right: 200px;
+  justify-content: flex-end;
+  position: sticky;
+  bottom: 30px;
 `;
 
 const NewBtn = styled.button`
   background-color: #00b493;
+  padding: 15px 20px;
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
+  border-radius: 50%;
+  margin-right: 30px;
   cursor: pointer;
 `;
 
