@@ -1,10 +1,10 @@
-import "./signIn.css";
+import './signIn.css';
 
 export default function Forms2() {
   return (
     <form>
       <div className="titleWrap">
-        <img src={require("./Daangeun_Logo_Color_RGB.png")} />{" "}
+        <img src={require('./Daangeun_Logo_Color_RGB.png')} />{' '}
       </div>
       <div className="inputBox">
         <div className="inputName">

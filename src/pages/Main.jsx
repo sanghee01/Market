@@ -1,54 +1,27 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import Nav from '../components/main/Nav';
+// import Nav from '../components/main/Nav';
 import { DataContext } from '../App';
 import { AiOutlinePlus } from 'react-icons/ai';
 import MainItem from './MainItem';
+import { useNavigate } from 'react-router-dom';
 
-const Main = () => {
+const Main = ({ items }) => {
   const { data } = useContext(DataContext);
-  const [items, setItems] = useState(data);
-  const sortId = items.sort((a, b) => b.id - a.id);
 
-  console.log(data);
-  const allCategories = [
-    '전체보기',
-    ...new Set(data.map((item) => item.category)),
-  ];
-
-  const filterItem = (category) => {
-    if (category === '전체보기') {
-      setItems(data);
-    } else {
-      setItems(data.filter((item) => item.category === category));
-    }
-  };
-  const onSearch = (text) => {
-    setItems(
-      data.filter((item) =>
-        item.title.toLowerCase().includes(text.toLowerCase())
-      )
-    );
-  };
+  const navigate = useNavigate();
 
   return (
     <div>
       <MainContainer>
-        <Nav
-          categories={allCategories}
-          filterItem={filterItem}
-          onSearch={onSearch}
-        />
         <MainItem items={items} />
+
         <NewBtnContainer>
-          <NewBtn>
+          <NewBtn onClick={() => navigate('/write')}>
             <AiOutlinePlus />
           </NewBtn>
         </NewBtnContainer>
       </MainContainer>
-      <Footer>
-        Copyright 2023. JSCODE Team Project - Market. All rights reserved.
-      </Footer>
     </div>
   );
 };
@@ -62,7 +35,7 @@ const NewBtnContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   position: sticky;
-  bottom: 30px;
+  bottom: 40px;
 `;
 
 const NewBtn = styled.button`
@@ -73,14 +46,15 @@ const NewBtn = styled.button`
   border-radius: 50%;
   margin-right: 30px;
   cursor: pointer;
+
+  &:hover {
+    border-radius: 30px;
+    width: 250px;
+
+    ::after {
+      content: ' 내 상품을 등록해보세요';
+    }
+  }
 `;
 
-const Footer = styled.footer`
-  display: flex;
-  height: 80px;
-  border-top: 1px solid #ececec;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8rem;
-`;
 export default Main;

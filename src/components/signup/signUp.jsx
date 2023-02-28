@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import "./signUp.css";
+import { useEffect, useState } from 'react';
+import './signUp.css';
 
 export default function Forms() {
-  const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [pwdc, setPwdc] = useState("");
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [pwdc, setPwdc] = useState('');
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
 
   function submit() {
     console.log({ email: email, pw: pwd, name: name, age: age });
-    alert(name + "님 환영합니다!");
+    alert(name + '님 환영합니다!');
   }
 
   return (
