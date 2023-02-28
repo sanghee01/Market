@@ -6,7 +6,7 @@ const Nav = ({ categories, filterItem, onSearch }) => {
   const [text, setText] = useState('');
   const navigate = useNavigate();
   const [btnIndex, setBtnIndex] = useState(0);
-  const [isLogIn, setIsLogIn] = useState(true);
+  const [isLogIn, setIsLogIn] = useState(false);
 
   const onSearchItem = useCallback(
     (e) => {
@@ -61,10 +61,13 @@ const Nav = ({ categories, filterItem, onSearch }) => {
           {isLogIn ? (
             <>
               <span>OO님 환영합니다</span>
-              <NavLogoutBtn>로그아웃</NavLogoutBtn>
+              <NavLogoutBtn onClick={onToggle}>로그아웃</NavLogoutBtn>
             </>
           ) : (
-            <>""</>
+            <>
+              <button>로그인</button>
+              <button>회원가입</button>
+            </>
           )}
         </NavLoginBtnWrap>
       </NavHeader>
