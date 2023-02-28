@@ -1,21 +1,15 @@
-import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-// import Nav from '../components/main/Nav';
-import { DataContext } from '../App';
 import { AiOutlinePlus } from 'react-icons/ai';
 import MainItem from './MainItem';
 import { useNavigate } from 'react-router-dom';
 
-const Main = ({ items }) => {
-  const { data } = useContext(DataContext);
-
+const Main = () => {
   const navigate = useNavigate();
 
   return (
     <div>
       <MainContainer>
-        <MainItem items={items} />
-
+        <MainItem />
         <NewBtnContainer>
           <NewBtn onClick={() => navigate('/write')}>
             <AiOutlinePlus />

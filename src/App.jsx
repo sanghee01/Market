@@ -52,8 +52,6 @@ function App() {
     },
   ]);
 
-  const [items, setItems] = useState(data);
-
   const allCategories = ['전체보기', '전자기기', '가구', '도서', '기타'];
 
   const filterItem = (category) => {
@@ -82,9 +80,8 @@ function App() {
             filterItem={filterItem}
             onSearch={onSearch}
           />
-
           <Routes>
-            <Route exact path="/" element={<Main items={items} />} />
+            <Route exact path="/" element={<Main />} />
             <Route exact path="/write" element={<WritingPages />} />
           </Routes>
           <Footer>

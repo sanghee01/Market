@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { DataContext } from '../App';
 import styled from 'styled-components';
 
-const MainItem = ({ items }) => {
+const MainItem = () => {
+  const { data } = useContext(DataContext);
+
   return (
     <Itemcontainer>
-      {items < 1 ? (
+      {data < 1 ? (
         <NoitemNotice>아이템이 없습니다</NoitemNotice>
       ) : (
-        items
+        data
           .map((item) => {
             const { id, title, img, desc, price, category } = item;
             return (
@@ -37,7 +40,7 @@ const Itemcontainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 80px 30px;
-  justify-items: center;
+  justify-data: center;
   min-height: 100vh;
 `;
 
