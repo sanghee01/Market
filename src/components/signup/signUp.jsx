@@ -22,6 +22,15 @@ export default function Forms() {
     }
   }, [pwd, pwdc]);
 
+  const [isNotCorrect, setIsNotCorrect] = useState(true);
+  useEffect(() => {
+    if (!isPasswordMatch && email && pwd && pwdc && name) {
+      setIsNotCorrect(false);
+    } else {
+      setIsNotCorrect(true);
+    }
+  }, [isPasswordMatch, email, pwd, pwdc, name]);
+
   return (
     <form>
       <div className="titleWrap">회원가입</div>
@@ -114,7 +123,7 @@ export default function Forms() {
         </div>
       </div>
       <div className="inputBox">
-        <button className="submit" onClick={submit}>
+        <button className="submit" onClick={submit} disabled={isNotCorrect}>
           가입하기
         </button>
       </div>

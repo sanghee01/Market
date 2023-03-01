@@ -71,8 +71,18 @@ form {
   border-radius: 16px;
 }
 
+.submit:disabled {
+  background-color: lightgray;
+}
+
 .required {
   margin-left: 2px;
   font-size: small;
   color: red;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
