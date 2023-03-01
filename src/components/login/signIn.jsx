@@ -37,6 +37,12 @@ export default function Forms2() {
       <div className="inputBox">
         <button className="submit">로그인</button>
       </div>
+      <div className="movetoSignup">
+        아직 회원이 아니세요?
+        <span className="movetoSignupButton" onClick={alert}>
+          회원가입
+        </span>
+      </div>
     </form>
   );
 }
