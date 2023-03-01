@@ -13,6 +13,15 @@ export default function Forms() {
     alert(name + "님 환영합니다!");
   }
 
+  const [isPasswordMatch, setIsPasswordMatch] = useState("");
+  useEffect(() => {
+    if (pwdc && pwd !== pwdc) {
+      setIsPasswordMatch("비밀번호가 일치하지 않습니다");
+    } else {
+      setIsPasswordMatch("");
+    }
+  }, [pwd, pwdc]);
+
   return (
     <form>
       <div className="titleWrap">회원가입</div>
@@ -69,6 +78,7 @@ export default function Forms() {
             onChange={(e) => setPwdc(e.target.value)}
           />
         </div>
+        <div id="PasswordNotMatch">{isPasswordMatch}</div>
       </div>
       <div className="inputBox">
         <div className="inputName">

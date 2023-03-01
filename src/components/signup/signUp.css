@@ -17,6 +17,12 @@ form {
   border-radius: 20px;
 }
 
+#PasswordNotMatch {
+  margin-left: 5px;
+  font-size: 10px;
+  color: red;
+}
+
 .titleWrap {
   font-size: 28px;
   font-weight: 700;
