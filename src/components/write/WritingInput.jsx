@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const WritingInput = ({
   title,
@@ -8,6 +8,7 @@ const WritingInput = ({
   placeholder,
   onChange,
   required,
+  accept,
 }) => {
   const inputUI = {
     input: (
@@ -17,6 +18,7 @@ const WritingInput = ({
         placeholder={placeholder}
         required={required}
         onChange={onChange}
+        accept={accept}
       />
     ),
     textarea: (
@@ -32,6 +34,7 @@ const WritingInput = ({
         <option>가구</option>
         <option>도서</option>
         <option>전자기기</option>
+        <option>기타</option>
       </select>
     ),
   };

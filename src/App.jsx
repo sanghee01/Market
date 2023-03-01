@@ -58,6 +58,7 @@ function App() {
 
   useEffect(() => {
     setItems(data);
+    console.log(data);
   }, [data]);
 
   const filterItem = (category) => {

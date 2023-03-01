@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react';
 import WritingInput from '../components/write/WritingInput';
 import styled from 'styled-components';
-import Nav from '../components/main/Nav';
 import { DataContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,6 +13,12 @@ const WritingPage = () => {
     price: '',
     desc: '',
   });
+  const [fileImage, setFileImage] = useState('');
+
+  const onSaveFileImage = (e) => {
+    setFileImage(URL.createObjectURL(e.target.files[0]));
+    console.log(e.target.value);
+  };
 
   const onChangeWriteInput = (e) => {
     setWriteInput({
@@ -25,6 +30,7 @@ const WritingPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(`
+      이미지: ${fileImage},
       제목: ${writeInput.title},
       카테고리: ${writeInput.category},
       가격: ${writeInput.price},
@@ -37,11 +43,10 @@ const WritingPage = () => {
         title: writeInput.title,
         category: writeInput.category,
         price: writeInput.price,
-        img: 'assets/img/image04.jpg',
+        img: fileImage,
         desc: writeInput.desc,
       },
     ]);
-    console.log(data);
     navigate('/');
   };
 
@@ -51,13 +56,18 @@ const WritingPage = () => {
         <h3>내 물건 팔기</h3>
         <hr />
         <WriteForm onSubmit={onSubmit}>
-          <WritingInput
-            title="이미지"
-            division="input"
-            name="image"
-            type="file"
-            // required
-          />
+          <WriteImgBox>
+            <WritingInput
+              title="이미지"
+              division="input"
+              name="image"
+              type="file"
+              accept="image/*"
+              onChange={onSaveFileImage}
+              required
+            />
+            {fileImage && <WriteImg src={fileImage} />}
+          </WriteImgBox>
           <WritingInput
             title="제목"
             division="input"
@@ -99,12 +109,22 @@ const WritingPage = () => {
 };
 
 const WriteContainer = styled.div`
-  height: 100vh;
+  height: 120vh;
   width: 40vw;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 170px;
 `;
 
+const WriteImgBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const WriteImg = styled.img`
+  margin: 30px;
+  height: 30%;
+  width: 30%;
+`;
 const WriteForm = styled.form`
   display: flex;
   flex-direction: column;
