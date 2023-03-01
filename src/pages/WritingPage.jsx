@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import WritingInput from '../components/write/WritingInput';
 import styled from 'styled-components';
 import { DataContext } from '../App';
@@ -14,6 +14,27 @@ const WritingPage = () => {
   });
   const [fileImage, setFileImage] = useState('');
   const [price, setPrice] = useState('');
+  const [isNotCorrect, setIsNotCorrect] = useState(true);
+
+  useEffect(() => {
+    if (
+      writeInput.title &&
+      writeInput.category &&
+      writeInput.desc &&
+      fileImage &&
+      price
+    ) {
+      setIsNotCorrect(false);
+    } else {
+      setIsNotCorrect(true);
+    }
+  }, [
+    writeInput.title,
+    writeInput.category,
+    writeInput.desc,
+    fileImage,
+    price,
+  ]);
 
   const onSaveFileImage = (e) => {
     setFileImage(URL.createObjectURL(e.target.files[0]));
@@ -109,7 +130,7 @@ const WritingPage = () => {
             required
             textarea
           />
-          <WriteSubmitBtn>작성완료</WriteSubmitBtn>
+          <WriteSubmitBtn disabled={isNotCorrect}>작성완료</WriteSubmitBtn>
         </WriteForm>
       </WriteContainer>
     </>
@@ -151,6 +172,10 @@ const WriteSubmitBtn = styled.button`
   :hover {
     background-color: #ff8b3dcf;
   }
+  :disabled {
+    background-color: lightgray;
+  }
+
   transition: all 0.2s;
 `;
 
