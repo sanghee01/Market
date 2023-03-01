@@ -10,10 +10,10 @@ const WritingPage = () => {
   const [writeInput, setWriteInput] = useState({
     title: '',
     category: '',
-    price: '',
     desc: '',
   });
   const [fileImage, setFileImage] = useState('');
+  const [price, setPrice] = useState('');
 
   const onSaveFileImage = (e) => {
     setFileImage(URL.createObjectURL(e.target.files[0]));
@@ -33,7 +33,7 @@ const WritingPage = () => {
       이미지: ${fileImage},
       제목: ${writeInput.title},
       카테고리: ${writeInput.category},
-      가격: ${writeInput.price},
+      가격: ${price},
       설명: ${writeInput.desc}
       `);
     setData([
@@ -42,12 +42,19 @@ const WritingPage = () => {
         id: data[data.length - 1].id + 1,
         title: writeInput.title,
         category: writeInput.category,
-        price: writeInput.price,
+        price: price,
         img: fileImage,
         desc: writeInput.desc,
       },
     ]);
     navigate('/');
+  };
+
+  const onPriceComma = (e) => {
+    e.target.value = String(e.target.value)
+      .replace(/[^\d]+/g, '')
+      .replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    setPrice(e.target.value);
   };
 
   return (
@@ -88,9 +95,10 @@ const WritingPage = () => {
             title="가격"
             division="input"
             name="price"
-            type="number"
+            type="text"
             placeholder="가격을 입력하세요."
             onChange={onChangeWriteInput}
+            onKeyUp={onPriceComma}
             required
           />
           <WritingInput
@@ -109,7 +117,7 @@ const WritingPage = () => {
 };
 
 const WriteContainer = styled.div`
-  height: 120vh;
+  height: 140vh;
   width: 40vw;
   margin: 0 auto;
   margin-top: 170px;
@@ -140,6 +148,10 @@ const WriteSubmitBtn = styled.button`
   font-size: 15px;
   font-weight: bold;
   color: white;
+  :hover {
+    background-color: #ff8b3dcf;
+  }
+  transition: all 0.2s;
 `;
 
 export default WritingPage;
