@@ -7,15 +7,20 @@ import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
   const navigate = useNavigate();
+  const { isLogin } = useContext(DataContext);
 
   return (
     <div>
       <MainContainer>
         <MainItem />
         <NewBtnContainer>
-          <NewBtn onClick={() => navigate('/write')}>
-            <AiOutlinePlus />
-          </NewBtn>
+          {isLogin ? (
+            <NewBtn onClick={() => navigate('/write')}>
+              <AiOutlinePlus />
+            </NewBtn>
+          ) : (
+            <></>
+          )}
         </NewBtnContainer>
       </MainContainer>
     </div>

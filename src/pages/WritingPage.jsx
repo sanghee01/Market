@@ -30,6 +30,7 @@ const WritingPage = () => {
       가격: ${writeInput.price},
       설명: ${writeInput.desc}
       `);
+
     setData([
       ...data,
       {
@@ -41,7 +42,7 @@ const WritingPage = () => {
         desc: writeInput.desc,
       },
     ]);
-    console.log(data);
+
     navigate('/');
   };
 
