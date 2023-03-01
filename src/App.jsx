@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './pages/Main';
 import GlobalStyle from './styles/GlobalStyles';
@@ -52,9 +52,13 @@ function App() {
     },
   ]);
 
+  const allCategories = ['전체보기', '전자기기', '가구', '도서', '기타'];
+
   const [items, setItems] = useState(data);
 
-  const allCategories = ['전체보기', '전자기기', '가구', '도서', '기타'];
+  useEffect(() => {
+    setItems(data);
+  }, [data]);
 
   const filterItem = (category) => {
     if (category === '전체보기') {
@@ -75,16 +79,11 @@ function App() {
   return (
     <div>
       <GlobalStyle />
-      <DataContext.Provider value={{ data, setData }}>
+      <DataContext.Provider value={{ data, setData, filterItem, items }}>
         <BrowserRouter>
-          <Nav
-            categories={allCategories}
-            filterItem={filterItem}
-            onSearch={onSearch}
-          />
-
+          <Nav categories={allCategories} onSearch={onSearch} />
           <Routes>
-            <Route exact path="/" element={<Main items={items} />} />
+            <Route exact path="/" element={<Main />} />
             <Route exact path="/write" element={<WritingPages />} />
           </Routes>
           <Footer>

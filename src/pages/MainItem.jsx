@@ -1,33 +1,42 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { DataContext } from '../App';
 
-const MainItem = ({ items }) => {
+const MainItem = () => {
+  const { items } = useContext(DataContext);
+
   return (
-    <Itemcontainer>
-      {items < 1 ? (
-        <NoitemNotice>아이템이 없습니다</NoitemNotice>
-      ) : (
-        items
-          .map((item) => {
-            const { id, title, img, desc, price, category } = item;
-            return (
-              <ItemArticle key={id}>
-                <ItemImg src={img} alt={title} />
-                <div>
-                  <header>
-                    <p>{title}</p>
-                  </header>
-                  <h4>{price}원</h4>
-                  <Category>{category}</Category>
-                </div>
-              </ItemArticle>
-            );
-          })
-          .sort((a, b) => b.key - a.key)
-      )}
-    </Itemcontainer>
+    <MainItemDiv>
+      <Itemcontainer>
+        {items < 1 ? (
+          <NoitemNotice>아이템이 없습니다</NoitemNotice>
+        ) : (
+          items
+            .map((item) => {
+              const { id, title, img, desc, price, category } = item;
+              return (
+                <ItemArticle key={id}>
+                  <ItemImg src={img} alt={title} />
+                  <div>
+                    <header>
+                      <p>{title}</p>
+                    </header>
+                    <h4>{price}원</h4>
+                    <Category>{category}</Category>
+                  </div>
+                </ItemArticle>
+              );
+            })
+            .sort((a, b) => b.key - a.key)
+        )}
+      </Itemcontainer>
+    </MainItemDiv>
   );
 };
+
+const MainItemDiv = styled.div`
+  min-height: 100vh;
+`;
 
 const Itemcontainer = styled.div`
   width: 80vw;
@@ -38,7 +47,6 @@ const Itemcontainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 80px 30px;
   justify-items: center;
-  min-height: 100vh;
 `;
 
 const NoitemNotice = styled.div`
@@ -68,6 +76,14 @@ const ItemImg = styled.img`
 const Category = styled.p`
   font-size: 0.9rem;
   color: #545353;
+`;
+
+const CountBtnWrap = styled.div`
+  border: 1px solid red;
+`;
+
+const CountBtn = styled.button`
+  border: 1px solid red;
 `;
 
 export default MainItem;

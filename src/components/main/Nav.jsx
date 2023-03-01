@@ -1,12 +1,14 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { DataContext } from '../../App';
 
-const Nav = ({ categories, filterItem, onSearch }) => {
+const Nav = ({ categories, onSearch }) => {
   const [text, setText] = useState('');
   const navigate = useNavigate();
   const [btnIndex, setBtnIndex] = useState(0);
   const [isLogIn, setIsLogIn] = useState(false);
+  const { filterItem } = useContext(DataContext);
 
   const onSearchItem = useCallback(
     (e) => {
