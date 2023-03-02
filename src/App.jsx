@@ -1,12 +1,11 @@
-
-import { useState, createContext, useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Main from './pages/Main';
-import GlobalStyle from './styles/GlobalStyles';
+import { useState, createContext, useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Main from "./pages/Main";
+import GlobalStyle from "./styles/GlobalStyles";
 import Nav from "./components/main/Nav";
-import WritingPages from './pages/WritingPage';
-import SignIn from './components/login/signIn';
-import SignUp from './components/signup/signUp';
+import WritingPages from "./pages/WritingPage";
+import SignIn from "./components/login/signIn";
+import SignUp from "./components/signup/signUp";
 import styled from "styled-components";
 
 export const DataContext = createContext();
@@ -31,11 +30,11 @@ function App() {
     },
     {
       id: 3,
-      title: "도서임 일단",
+      title: "드르렁",
       category: "도서",
-      price: "300,000",
+      price: "2,000",
       img: "assets/img/image03.jpg",
-      desc: "송강이 입었던 패딩팝니다",
+      desc: "드르렁 책입니다",
     },
     {
       id: 4,
@@ -92,8 +91,8 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Main />} />
             <Route exact path="/write" element={<WritingPages />} />
-            {/* <Route exact path="/login" element={<SignIn />} />
-            <Route exact path="/signup" element={<SignUp />} /> */}
+            <Route exact path="/login" element={<SignIn />} />
+            <Route exact path="/signup" element={<SignUp />} />
           </Routes>
           <Footer>
             Copyright 2023. JSCODE Team Project - Market. All rights reserved.
