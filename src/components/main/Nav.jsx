@@ -1,10 +1,10 @@
-import React, { useCallback, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { DataContext } from '../../App';
+import React, { useCallback, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { DataContext } from "../../App";
 
 const Nav = ({ categories, onSearch }) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const navigate = useNavigate();
   const [btnIndex, setBtnIndex] = useState(0);
 
@@ -14,15 +14,15 @@ const Nav = ({ categories, onSearch }) => {
     (e) => {
       e.preventDefault();
       onSearch(text);
-      setText('');
+      setText("");
     },
     [onSearch, text]
   );
 
   const onMain = useCallback(() => {
-    filterItem('전체보기');
+    filterItem("전체보기");
     setBtnIndex(0);
-    navigate('/');
+    navigate("/");
   }, [filterItem, navigate]);
 
   const onToggle = () => {
@@ -42,7 +42,7 @@ const Nav = ({ categories, onSearch }) => {
                   setBtnIndex(index);
                 }}
                 key={index}
-                className={btnIndex === index && 'active_btn'}
+                className={btnIndex === index && "active_btn"}
               >
                 {category}
               </NavBtn>
@@ -54,7 +54,7 @@ const Nav = ({ categories, onSearch }) => {
           <NavInput
             type="text"
             value={text}
-            placeholder={'물품을 검색해보세요'}
+            placeholder={"물품을 검색해보세요"}
             onChange={(e) => setText(e.target.value)}
           />
           <NavInputBtn type="submit">검색하기</NavInputBtn>
@@ -63,11 +63,11 @@ const Nav = ({ categories, onSearch }) => {
           {isLogin ? (
             <NavLogOutBtnWrap>
               <span>OO님 환영합니다</span>
-              <NavLogoutBtn onClick={onToggle}>로그아웃</NavLogoutBtn>
+              <NavLogoutBtn>로그아웃</NavLogoutBtn>
             </NavLogOutBtnWrap>
           ) : (
             <NavLoginBtnWrap>
-              <NavLoginBtn onClick={onToggle}>로그인</NavLoginBtn>
+              <NavLoginBtn>로그인</NavLoginBtn>
               <NavSignUpBtn>회원가입</NavSignUpBtn>
             </NavLoginBtnWrap>
           )}
