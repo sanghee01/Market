@@ -1,14 +1,16 @@
 import React, { useCallback, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { DataContext } from "../../App";
+import { DataContext, SignUpContext } from "../../App";
 
-const Nav = ({ categories, onSearch }) => {
+const Nav = ({ onSearch }) => {
   const [text, setText] = useState("");
   const navigate = useNavigate();
-  const [btnIndex, setBtnIndex] = useState(0);
+  const [btnIndex, setBtnIndex] = useState(1);
 
-  const { filterItem, isLogin, setIsLogin } = useContext(DataContext);
+  const { filterItem, isLogin, setIsLogin, allCategories } =
+    useContext(DataContext);
+  const { name } = useContext(SignUpContext);
 
   const onSearchItem = useCallback(
     (e) => {
@@ -21,7 +23,7 @@ const Nav = ({ categories, onSearch }) => {
 
   const onMain = useCallback(() => {
     filterItem("전체보기");
-    setBtnIndex(0);
+    setBtnIndex(1);
     navigate("/");
   }, [filterItem, navigate]);
 
@@ -34,17 +36,17 @@ const Nav = ({ categories, onSearch }) => {
       <NavHeader>
         <Logo src="assets/img/Logo1.jpg" alt="logo" onClick={onMain} />
         <NavBtnWrap>
-          {categories.map((category, index) => {
+          {allCategories.map((category) => {
             return (
               <NavBtn
                 onClick={() => {
-                  filterItem(category);
-                  setBtnIndex(index);
+                  filterItem(category.text);
+                  setBtnIndex(category.id);
                 }}
-                key={index}
-                className={btnIndex === index && "active_btn"}
+                key={category.id}
+                className={btnIndex === category.id && "active_btn"}
               >
-                {category}
+                {category.text}
               </NavBtn>
             );
           })}
@@ -62,7 +64,7 @@ const Nav = ({ categories, onSearch }) => {
         <div>
           {isLogin ? (
             <NavLogOutBtnWrap>
-              <span>OO님 환영합니다</span>
+              <WelcomeText>{name}님 환영합니다</WelcomeText>
               <NavLogoutBtn onClick={onToggle}>로그아웃</NavLogoutBtn>
             </NavLogOutBtnWrap>
           ) : (
@@ -159,6 +161,11 @@ const NavLogOutBtnWrap = styled.div`
   width: 140px;
 `;
 
+const WelcomeText = styled.span`
+  font-size: 14px;
+  text-align: center;
+`;
+
 const NavLogoutBtn = styled.button`
   background: none;
   width: 80px;
@@ -179,7 +186,7 @@ const NavLoginBtn = styled.button`
   font-size: 14px;
   text-decoration: underline;
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 15px;
 `;
 
 const NavSignUpBtn = styled.button`
