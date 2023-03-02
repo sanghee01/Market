@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import WritingInput from "../components/write/WritingInput";
 import styled from "styled-components";
-import Nav from "../components/main/Nav";
 import { DataContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -11,13 +10,36 @@ const WritingPage = () => {
   const [writeInput, setWriteInput] = useState({
     title: "",
     category: "",
-    price: "",
     desc: "",
   });
-  const allCategories = [
-    "전체보기",
-    ...new Set(data.map((item) => item.category)),
-  ];
+  const [fileImage, setFileImage] = useState("");
+  const [price, setPrice] = useState("");
+  const [isNotCorrect, setIsNotCorrect] = useState(true);
+
+  useEffect(() => {
+    if (
+      writeInput.title &&
+      writeInput.category &&
+      writeInput.desc &&
+      fileImage &&
+      price
+    ) {
+      setIsNotCorrect(false);
+    } else {
+      setIsNotCorrect(true);
+    }
+  }, [
+    writeInput.title,
+    writeInput.category,
+    writeInput.desc,
+    fileImage,
+    price,
+  ]);
+
+  const onSaveFileImage = (e) => {
+    setFileImage(URL.createObjectURL(e.target.files[0]));
+    console.log(e.target.value);
+  };
 
   const onChangeWriteInput = (e) => {
     setWriteInput({
@@ -29,40 +51,52 @@ const WritingPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(`
+      이미지: ${fileImage},
       제목: ${writeInput.title},
       카테고리: ${writeInput.category},
-      가격: ${writeInput.price},
+      가격: ${price},
       설명: ${writeInput.desc}
       `);
+
     setData([
       ...data,
       {
         id: data[data.length - 1].id + 1,
         title: writeInput.title,
         category: writeInput.category,
-        price: writeInput.price,
-        img: "assets/img/image04.jpg",
+        price: price,
+        img: fileImage,
         desc: writeInput.desc,
       },
     ]);
-    console.log(data);
     navigate("/");
+  };
+
+  const onPriceComma = (e) => {
+    e.target.value = String(e.target.value)
+      .replace(/[^\d]+/g, "")
+      .replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+    setPrice(e.target.value);
   };
 
   return (
     <>
-      <Nav categories={allCategories} />
       <WriteContainer>
         <h3>내 물건 팔기</h3>
         <hr />
         <WriteForm onSubmit={onSubmit}>
-          <WritingInput
-            title="이미지"
-            division="input"
-            name="image"
-            type="file"
-            // required
-          />
+          <WriteImgBox>
+            <WritingInput
+              title="이미지"
+              division="input"
+              name="image"
+              type="file"
+              accept="image/*"
+              onChange={onSaveFileImage}
+              required
+            />
+            {fileImage && <WriteImg src={fileImage} />}
+          </WriteImgBox>
           <WritingInput
             title="제목"
             division="input"
@@ -83,9 +117,10 @@ const WritingPage = () => {
             title="가격"
             division="input"
             name="price"
-            type="number"
+            type="text"
             placeholder="가격을 입력하세요."
             onChange={onChangeWriteInput}
+            onKeyUp={onPriceComma}
             required
           />
           <WritingInput
@@ -96,7 +131,7 @@ const WritingPage = () => {
             required
             textarea
           />
-          <WriteSubmitBtn>작성완료</WriteSubmitBtn>
+          <WriteSubmitBtn disabled={isNotCorrect}>작성완료</WriteSubmitBtn>
         </WriteForm>
       </WriteContainer>
     </>
@@ -104,12 +139,22 @@ const WritingPage = () => {
 };
 
 const WriteContainer = styled.div`
-  height: 100vh;
+  height: 140vh;
   width: 40vw;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 170px;
 `;
 
+const WriteImgBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const WriteImg = styled.img`
+  margin: 30px;
+  height: 30%;
+  width: 30%;
+`;
 const WriteForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -125,6 +170,14 @@ const WriteSubmitBtn = styled.button`
   font-size: 15px;
   font-weight: bold;
   color: white;
+  :hover {
+    background-color: #ff8b3dcf;
+  }
+  :disabled {
+    background-color: lightgray;
+  }
+
+  transition: all 0.2s;
 `;
 
 export default WritingPage;
