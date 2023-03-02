@@ -55,7 +55,7 @@ function App() {
   const allCategories = ["전체보기", "전자기기", "가구", "도서", "기타"];
 
   const [items, setItems] = useState(data);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
     setItems(data);
