@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './signUp.css';
 
 export default function SignUp() {
+
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [pwdc, setPwdc] = useState('');
