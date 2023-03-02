@@ -63,12 +63,16 @@ const Nav = ({ categories, onSearch }) => {
           {isLogin ? (
             <NavLogOutBtnWrap>
               <span>OO님 환영합니다</span>
-              <NavLogoutBtn>로그아웃</NavLogoutBtn>
+              <NavLogoutBtn onClick={onToggle}>로그아웃</NavLogoutBtn>
             </NavLogOutBtnWrap>
           ) : (
             <NavLoginBtnWrap>
-              <NavLoginBtn>로그인</NavLoginBtn>
-              <NavSignUpBtn>회원가입</NavSignUpBtn>
+              <NavLoginBtn onClick={() => navigate("/login")}>
+                로그인
+              </NavLoginBtn>
+              <NavSignUpBtn onClick={() => navigate("/signup")}>
+                회원가입
+              </NavSignUpBtn>
             </NavLoginBtnWrap>
           )}
         </div>
@@ -94,6 +98,7 @@ const NavHeader = styled.div`
 `;
 
 const Logo = styled.img`
+  width: 150px;
   height: 60px;
   cursor: pointer;
   margin-left: 100px;

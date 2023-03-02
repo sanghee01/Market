@@ -64,9 +64,9 @@ const ItemArticle = styled.article`
 `;
 
 const ItemImg = styled.img`
+  background-size: contain;
   height: 280px;
   width: 300px;
-  background-size: contain;
   border-radius: 10px;
   margin-bottom: 10px;
   display: block;
