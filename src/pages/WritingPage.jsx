@@ -1,18 +1,17 @@
-import { useState, useContext } from 'react';
-import WritingInput from '../components/write/WritingInput';
-import styled from 'styled-components';
-import Nav from '../components/main/Nav';
-import { DataContext } from '../App';
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext } from "react";
+import WritingInput from "../components/write/WritingInput";
+import styled from "styled-components";
+import { DataContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const WritingPage = () => {
   const { data, setData } = useContext(DataContext);
   const navigate = useNavigate();
   const [writeInput, setWriteInput] = useState({
-    title: '',
-    category: '',
-    price: '',
-    desc: '',
+    title: "",
+    category: "",
+    price: "",
+    desc: "",
   });
 
   const onChangeWriteInput = (e) => {
@@ -38,12 +37,12 @@ const WritingPage = () => {
         title: writeInput.title,
         category: writeInput.category,
         price: writeInput.price,
-        img: 'assets/img/image04.jpg',
+        img: "assets/img/image04.jpg",
         desc: writeInput.desc,
       },
     ]);
 
-    navigate('/');
+    navigate("/");
   };
 
   return (

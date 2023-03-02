@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
-import { DataContext } from '../App';
-import { AiOutlinePlus } from 'react-icons/ai';
-import MainItem from './MainItem';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import styled from "styled-components";
+import { DataContext } from "../App";
+import { AiOutlinePlus } from "react-icons/ai";
+import MainItem from "../components/main/MainItem";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Main = () => {
         <MainItem />
         <NewBtnContainer>
           {isLogin ? (
-            <NewBtn onClick={() => navigate('/write')}>
+            <NewBtn onClick={() => navigate("/write")}>
               <AiOutlinePlus />
             </NewBtn>
           ) : (
@@ -53,7 +53,7 @@ const NewBtn = styled.button`
     width: 250px;
 
     ::after {
-      content: ' 내 상품을 등록해보세요';
+      content: " 내 상품을 등록해보세요";
     }
   }
 `;
