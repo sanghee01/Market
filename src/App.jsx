@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './pages/Main';
 import GlobalStyle from './styles/GlobalStyles';
 import WritingPages from './pages/WritingPage';
+import DetailPage from './pages/DetailPage';
+
 
 export const DataContext = createContext();
 
@@ -58,6 +60,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Main />} />
             <Route exact path="/write" element={<WritingPages />} />
+            <Route exact path="/detail" element={<DetailPage />} />
           </Routes>
         </BrowserRouter>
       </DataContext.Provider>
