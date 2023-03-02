@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
-import { DataContext } from '../App';
+import React, { useContext, useEffect, useState } from "react";
+import styled from "styled-components";
+import { DataContext } from "../../App";
 
 const MainItem = () => {
   const { items } = useContext(DataContext);
@@ -76,14 +76,6 @@ const ItemImg = styled.img`
 const Category = styled.p`
   font-size: 0.9rem;
   color: #545353;
-`;
-
-const CountBtnWrap = styled.div`
-  border: 1px solid red;
-`;
-
-const CountBtn = styled.button`
-  border: 1px solid red;
 `;
 
 export default MainItem;

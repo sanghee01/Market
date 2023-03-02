@@ -1,38 +1,38 @@
-import React, { useCallback, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { DataContext } from '../../App';
+import React, { useCallback, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { DataContext } from "../../App";
 
 const Nav = ({ categories, onSearch }) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const navigate = useNavigate();
   const [btnIndex, setBtnIndex] = useState(0);
-  const [isLogIn, setIsLogIn] = useState(false);
-  const { filterItem } = useContext(DataContext);
+
+  const { filterItem, isLogin, setIsLogin } = useContext(DataContext);
 
   const onSearchItem = useCallback(
     (e) => {
       e.preventDefault();
       onSearch(text);
-      setText('');
+      setText("");
     },
     [onSearch, text]
   );
 
   const onMain = useCallback(() => {
-    filterItem('전체보기');
+    filterItem("전체보기");
     setBtnIndex(0);
-    navigate('/');
+    navigate("/");
   }, [filterItem, navigate]);
 
   const onToggle = () => {
-    setIsLogIn(!isLogIn);
+    setIsLogin(!isLogin);
   };
 
   return (
     <NavBar>
       <NavHeader>
-        <Logo src="assets/img/logo.png" alt="logo" onClick={onMain} />
+        <Logo src="assets/img/Logo1.jpg" alt="logo" onClick={onMain} />
         <NavBtnWrap>
           {categories.map((category, index) => {
             return (
@@ -42,7 +42,7 @@ const Nav = ({ categories, onSearch }) => {
                   setBtnIndex(index);
                 }}
                 key={index}
-                className={btnIndex === index && 'active_btn'}
+                className={btnIndex === index && "active_btn"}
               >
                 {category}
               </NavBtn>
@@ -54,24 +54,24 @@ const Nav = ({ categories, onSearch }) => {
           <NavInput
             type="text"
             value={text}
-            placeholder={'물품을 검색해보세요'}
+            placeholder={"물품을 검색해보세요"}
             onChange={(e) => setText(e.target.value)}
           />
           <NavInputBtn type="submit">검색하기</NavInputBtn>
         </form>
-        <NavLoginBtnWrap>
-          {isLogIn ? (
-            <>
+        <div>
+          {isLogin ? (
+            <NavLogOutBtnWrap>
               <span>OO님 환영합니다</span>
-              <NavLogoutBtn onClick={onToggle}>로그아웃</NavLogoutBtn>
-            </>
+              <NavLogoutBtn>로그아웃</NavLogoutBtn>
+            </NavLogOutBtnWrap>
           ) : (
-            <>
-              <button>로그인</button>
-              <button>회원가입</button>
-            </>
+            <NavLoginBtnWrap>
+              <NavLoginBtn>로그인</NavLoginBtn>
+              <NavSignUpBtn>회원가입</NavSignUpBtn>
+            </NavLoginBtnWrap>
           )}
-        </NavLoginBtnWrap>
+        </div>
       </NavHeader>
     </NavBar>
   );
@@ -90,10 +90,11 @@ const NavHeader = styled.div`
   align-items: center;
   justify-content: space-around;
   padding: 1rem 50px;
+  height: 70px;
 `;
 
 const Logo = styled.img`
-  height: 40px;
+  height: 60px;
   cursor: pointer;
   margin-left: 100px;
 `;
@@ -148,18 +149,39 @@ const NavInputBtn = styled.button`
   }
 `;
 
-const NavLoginBtnWrap = styled.div`
+const NavLogOutBtnWrap = styled.div`
   display: grid;
+  width: 140px;
 `;
 
 const NavLogoutBtn = styled.button`
   background: none;
-
   width: 80px;
   font-size: 13px;
   border: none;
   margin: 0 auto;
   cursor: pointer;
   color: gray;
+`;
+
+const NavLoginBtnWrap = styled.div`
+  width: 140px;
+`;
+
+const NavLoginBtn = styled.button`
+  background: none;
+  border: none;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-right: 10px;
+`;
+
+const NavSignUpBtn = styled.button`
+  background: none;
+  border: none;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 export default Nav;

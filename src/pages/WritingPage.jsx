@@ -1,19 +1,19 @@
-import { useState, useContext, useEffect } from 'react';
-import WritingInput from '../components/write/WritingInput';
-import styled from 'styled-components';
-import { DataContext } from '../App';
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext, useEffect } from "react";
+import WritingInput from "../components/write/WritingInput";
+import styled from "styled-components";
+import { DataContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const WritingPage = () => {
   const { data, setData } = useContext(DataContext);
   const navigate = useNavigate();
   const [writeInput, setWriteInput] = useState({
-    title: '',
-    category: '',
-    desc: '',
+    title: "",
+    category: "",
+    desc: "",
   });
-  const [fileImage, setFileImage] = useState('');
-  const [price, setPrice] = useState('');
+  const [fileImage, setFileImage] = useState("");
+  const [price, setPrice] = useState("");
   const [isNotCorrect, setIsNotCorrect] = useState(true);
 
   useEffect(() => {
@@ -57,6 +57,7 @@ const WritingPage = () => {
       가격: ${price},
       설명: ${writeInput.desc}
       `);
+
     setData([
       ...data,
       {
@@ -68,13 +69,13 @@ const WritingPage = () => {
         desc: writeInput.desc,
       },
     ]);
-    navigate('/');
+    navigate("/");
   };
 
   const onPriceComma = (e) => {
     e.target.value = String(e.target.value)
-      .replace(/[^\d]+/g, '')
-      .replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+      .replace(/[^\d]+/g, "")
+      .replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
     setPrice(e.target.value);
   };
 
