@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-form {
+.form2 {
   margin-top: 150px;
   position: absolute;
   width: 100%;
@@ -24,13 +24,6 @@ form {
 
 .inputBox {
   margin-bottom: 30px;
-}
-
-.inputName {
-  font-size: 12px;
-  font-weight: 600;
-  color: #262626;
-  margin-bottom: 4px;
 }
 
 .inputField {
@@ -69,6 +62,16 @@ form {
   color: red;
 }
 
+.movetoSignup {
+  color: gray;
+  font-size: 12px;
+  text-align: center;
+}
+
+.movetoSignupButton {
+  text-decoration: underline;
+  cursor: pointer;
+}
 img {
   width: 300px;
   margin: 0px;

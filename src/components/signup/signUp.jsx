@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import './signUp.css';
 
-export default function Forms() {
+export default function SignUp() {
+
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [pwdc, setPwdc] = useState('');
@@ -13,8 +14,26 @@ export default function Forms() {
     alert(name + '님 환영합니다!');
   }
 
+  const [isPasswordMatch, setIsPasswordMatch] = useState('');
+  useEffect(() => {
+    if (pwdc && pwd !== pwdc) {
+      setIsPasswordMatch('비밀번호가 일치하지 않습니다');
+    } else {
+      setIsPasswordMatch('');
+    }
+  }, [pwd, pwdc]);
+
+  const [isNotCorrect, setIsNotCorrect] = useState(true);
+  useEffect(() => {
+    if (!isPasswordMatch && email && pwd && pwdc && name) {
+      setIsNotCorrect(false);
+    } else {
+      setIsNotCorrect(true);
+    }
+  }, [isPasswordMatch, email, pwd, pwdc, name]);
+
   return (
-    <form>
+    <form className="form1">
       <div className="titleWrap">회원가입</div>
       <div className="inputBox">
         <div className="inputName">
@@ -69,6 +88,7 @@ export default function Forms() {
             onChange={(e) => setPwdc(e.target.value)}
           />
         </div>
+        <div id="PasswordNotMatch">{isPasswordMatch}</div>
       </div>
       <div className="inputBox">
         <div className="inputName">
@@ -104,7 +124,7 @@ export default function Forms() {
         </div>
       </div>
       <div className="inputBox">
-        <button className="submit" onClick={submit}>
+        <button className="submit" onClick={submit} disabled={isNotCorrect}>
           가입하기
         </button>
       </div>

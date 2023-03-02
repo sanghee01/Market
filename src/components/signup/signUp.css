@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-form {
+.form1 {
   margin-top: 150px;
   position: absolute;
   width: 100%;
@@ -15,6 +15,12 @@ form {
   display: flex;
   flex-direction: column;
   border-radius: 20px;
+}
+
+#PasswordNotMatch {
+  margin-left: 5px;
+  font-size: 10px;
+  color: red;
 }
 
 .titleWrap {
@@ -65,8 +71,18 @@ form {
   border-radius: 16px;
 }
 
+.submit:disabled {
+  background-color: lightgray;
+}
+
 .required {
   margin-left: 2px;
   font-size: small;
   color: red;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

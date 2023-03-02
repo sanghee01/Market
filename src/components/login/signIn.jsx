@@ -1,8 +1,8 @@
 import './signIn.css';
 
-export default function Forms2() {
+export default function SignIn() {
   return (
-    <form>
+    <form className="form2">
       <div className="titleWrap">
         <img src={require('./Daangeun_Logo_Color_RGB.png')} />{' '}
       </div>
@@ -36,6 +36,12 @@ export default function Forms2() {
       </div>
       <div className="inputBox">
         <button className="submit">로그인</button>
+      </div>
+      <div className="movetoSignup">
+        아직 회원이 아니세요?
+        <span className="movetoSignupButton" onClick={alert}>
+          회원가입
+        </span>
       </div>
     </form>
   );
