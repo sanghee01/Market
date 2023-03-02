@@ -2,7 +2,7 @@ import './signIn.css';
 
 export default function SignIn() {
   return (
-    <form>
+    <form className="form2">
       <div className="titleWrap">
         <img src={require('./Daangeun_Logo_Color_RGB.png')} />{' '}
       </div>

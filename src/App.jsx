@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './pages/Main';
 import GlobalStyle from './styles/GlobalStyles';
 import WritingPages from './pages/WritingPage';
+// import SignIn from './components/login/signIn';
+// import SignUp from './components/signup/signUp';
 
 export const DataContext = createContext();
 
@@ -58,6 +60,8 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Main />} />
             <Route exact path="/write" element={<WritingPages />} />
+            {/* <Route exact path="/login" element={<SignIn />} />
+            <Route exact path="/signup" element={<SignUp />} /> */}
           </Routes>
         </BrowserRouter>
       </DataContext.Provider>

@@ -32,7 +32,7 @@ export default function SignUp() {
   }, [isPasswordMatch, email, pwd, pwdc, name]);
 
   return (
-    <form>
+    <form className="form1">
       <div className="titleWrap">회원가입</div>
       <div className="inputBox">
         <div className="inputName">
