@@ -3,17 +3,20 @@
   padding: 0;
 }
 
+.signUpDIv {
+  display: flex;
+  justify-content: center;
+  height: 1000px;
+}
+
 .form1 {
   margin-top: 150px;
-  position: absolute;
   width: 100%;
   max-width: 500px;
-  padding: 20px;
+  height: 620px;
+  padding: 30px;
   left: 50%;
-  transform: translate(-50%, 0);
   background-color: #f7f7f7;
-  display: flex;
-  flex-direction: column;
   border-radius: 20px;
 }
 
@@ -81,8 +84,8 @@
   color: red;
 }
 
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

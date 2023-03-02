@@ -9,6 +9,7 @@ import SignUp from "./components/signup/signUp";
 import styled from "styled-components";
 
 export const DataContext = createContext();
+export const SignUpContext = createContext();
 
 function App() {
   const [data, setData] = useState([
@@ -54,10 +55,21 @@ function App() {
     },
   ]);
 
-  const allCategories = ["전체보기", "전자기기", "가구", "도서", "기타"];
+  const allCategories = [
+    { id: 1, text: "전체보기" },
+    { id: 2, text: "전자기기" },
+    { id: 3, text: "가구" },
+    { id: 4, text: "도서" },
+    { id: 5, text: "기타" },
+  ];
 
   const [items, setItems] = useState(data);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [pwdc, setPwdc] = useState("");
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
 
   useEffect(() => {
     setItems(data);
@@ -84,20 +96,43 @@ function App() {
     <div>
       <GlobalStyle />
       <DataContext.Provider
-        value={{ data, setData, filterItem, items, isLogin, setIsLogin }}
+        value={{
+          data,
+          setData,
+          filterItem,
+          items,
+          isLogin,
+          setIsLogin,
+          allCategories,
+        }}
       >
-        <BrowserRouter>
-          <Nav categories={allCategories} onSearch={onSearch} />
-          <Routes>
-            <Route exact path="/" element={<Main />} />
-            <Route exact path="/write" element={<WritingPages />} />
-            <Route exact path="/login" element={<SignIn />} />
-            <Route exact path="/signup" element={<SignUp />} />
-          </Routes>
-          <Footer>
-            Copyright 2023. JSCODE Team Project - Market. All rights reserved.
-          </Footer>
-        </BrowserRouter>
+        <SignUpContext.Provider
+          value={{
+            email,
+            setEmail,
+            pwd,
+            setPwd,
+            pwdc,
+            setPwdc,
+            name,
+            setName,
+            age,
+            setAge,
+          }}
+        >
+          <BrowserRouter>
+            <Nav onSearch={onSearch} />
+            <Routes>
+              <Route exact path="/" element={<Main />} />
+              <Route exact path="/write" element={<WritingPages />} />
+              <Route exact path="/login" element={<SignIn />} />
+              <Route exact path="/signup" element={<SignUp />} />
+            </Routes>
+            <Footer>
+              Copyright 2023. JSCODE Team Project - Market. All rights reserved.
+            </Footer>
+          </BrowserRouter>
+        </SignUpContext.Provider>
       </DataContext.Provider>
     </div>
   );
