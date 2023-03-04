@@ -1,19 +1,20 @@
-import { useState, useContext, useEffect } from "react";
-import WritingInput from "../components/write/WritingInput";
-import styled from "styled-components";
-import { DataContext } from "../App";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from 'react';
+import WritingInput from '../components/write/WritingInput';
+import styled from 'styled-components';
+import { DataContext, SignUpContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 const WritingPage = () => {
   const { data, setData } = useContext(DataContext);
+  const { name } = useContext(SignUpContext);
   const navigate = useNavigate();
   const [writeInput, setWriteInput] = useState({
-    title: "",
-    category: "",
-    desc: "",
+    title: '',
+    category: '',
+    desc: '',
   });
-  const [fileImage, setFileImage] = useState("");
-  const [price, setPrice] = useState("");
+  const [fileImage, setFileImage] = useState('');
+  const [price, setPrice] = useState('');
   const [isNotCorrect, setIsNotCorrect] = useState(true);
 
   useEffect(() => {
@@ -50,14 +51,6 @@ const WritingPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(`
-      이미지: ${fileImage},
-      제목: ${writeInput.title},
-      카테고리: ${writeInput.category},
-      가격: ${price},
-      설명: ${writeInput.desc}
-      `);
-
     setData([
       ...data,
       {
@@ -67,15 +60,16 @@ const WritingPage = () => {
         price: price,
         img: fileImage,
         desc: writeInput.desc,
+        writer: name,
       },
     ]);
-    navigate("/");
+    navigate('/');
   };
 
   const onPriceComma = (e) => {
     e.target.value = String(e.target.value)
-      .replace(/[^\d]+/g, "")
-      .replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+      .replace(/[^\d]+/g, '')
+      .replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
     setPrice(e.target.value);
   };
 
