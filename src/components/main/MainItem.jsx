@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import { DataContext } from "../../App";
+import React, { useContext } from 'react';
+import styled from 'styled-components';
+import { DataContext } from '../../App';
 
 const MainItem = () => {
   const { items } = useContext(DataContext);
@@ -13,7 +13,7 @@ const MainItem = () => {
         ) : (
           items
             .map((item) => {
-              const { id, title, img, desc, price, category } = item;
+              const { id, title, img, price, category } = item;
               return (
                 <ItemArticle key={id}>
                   <ItemImg src={img} alt={title} />
