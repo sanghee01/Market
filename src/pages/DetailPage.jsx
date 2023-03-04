@@ -1,154 +1,117 @@
-import { useState, useContext } from "react";
-import styled from "styled-components";
-import Nav from "../components/main/Nav";
-import { DataContext } from "../App";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import { DataContext } from '../App';
 
 const DetailPage = () => {
+  const { id } = useParams();
+  const { data } = useContext(DataContext);
+  const [quantity, setQuantity] = useState(1);
 
-  const [detail, setDetail] = useState([]);
-  
+  const item = data.find((item) => item.id === parseInt(id));
+
+  const handleMinus = () => {
+    if (quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
+  };
+
+  const handlePlus = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
   return (
-    <>
-      <main className={detail.main}>
-
-        <section className={detail.product}>
-          <div className={detail.product_img}>
-            <img src="assets/img/image01.jpg" alt="product" />
-          </div>
-        </section>
-
-        <section className={detail.product}>
-          <div className={detail.product_info}>
-            <p className={detail.product_name}>아이폰 레드</p>
-            <span className={detail.price}>
-              120,000
-              <span className={detail.unit}>원</span>
-            </span>
-          </div>
-          <div className={detail.explain}>
-            <p>올해 샀구 한번도 안뜯은 멀쩡한 아이폰 팝니다. 이런 매물 구하기 쉽지 않습니다. </p>
-          </div>       
-          <div className={detail.line}></div>
-          <div className={detail.btn}>
-            <button className={detail.btn_buy}>바로 구매</button>
-          </div>
-        </section>
-
-
-        <section className={detail.product}>
-
-          <div className={detail.product_img}>
-            <img src="assets/img/image02.jpg" alt="product" />
-          </div>
-
-        </section>
-
-        <section className={detail.product}>
-
-          <div className={detail.product_info}>
-            <p className={detail.product_name}>그냥 소파</p>
-            <span className={detail.price}>
-              1,000
-              <span className={detail.unit}>원</span>
-            </span>
-          </div>
-
-          <div className={detail.explain}>
-            <p>사가세요. 집에 소파 하나씩은 있잖아요?? </p>
-          </div>
-          
-          <div className={detail.line}></div>
-          <div className={detail.btn}>
-            <button className={detail.btn_buy}>바로 구매</button>
-          </div>
-        </section>
-
-        <section className={detail.product}>
-
-          <div className={detail.product_img}>
-            <img src="assets/img/image03.jpg" alt="product" />
-          </div>
-
-        </section>
-
-        <section className={detail.product}>
-
-          <div className={detail.product_info}>
-            <p className={detail.product_name}>송강 패딩</p>
-            <span className={detail.price}>
-              1,000
-              <span className={detail.unit}>원</span>
-            </span>
-          </div>
-
-          <div className={detail.explain}>
-            <p>송강이 입었던 패딩 팝니다. 송강 좋아하시는 분들 이라면 구매 부탁드려요.  </p>
-          </div>
-          
-          <div className={detail.line}></div>
-          <div className={detail.btn}>
-            <button className={detail.btn_buy}>바로 구매</button>
-          </div>
-        </section>
-
-        <section className={detail.product}>
-
-          <div className={detail.product_img}>
-            <img src="assets/img/image04.jpg" alt="product" />
-          </div>
-
-        </section>
-
-        <section className={detail.product}>
-
-          <div className={detail.product_info}>
-            <p className={detail.product_name}>맥북입니다</p>
-            <span className={detail.price}>
-              50,000
-              <span className={detail.unit}>원</span>
-            </span>
-          </div>
-
-          <div className={detail.explain}>
-            <p>싸게 처분함. 개발자라면 맥북 1개 정도는!! </p>
-          </div>
-          
-          <div className={detail.line}></div>
-          <div className={detail.btn}>
-            <button className={detail.btn_buy}>바로 구매</button>
-          </div>
-        </section>
-
-        <section className={detail.product}>
-
-          <div className={detail.product_img}>
-            <img src="assets/img/image01.jpg" alt="product" />
-          </div>
-
-        </section>
-
-        <section className={detail.product}>
-
-          <div className={detail.product_info}>
-            <p className={detail.product_name}>자전거 팔아요</p>
-            <span className={detail.price}>
-              5,000
-              <span className={detail.unit}>원</span>
-            </span>
-          </div>
-
-          <div className={detail.explain}>
-            <p>팝니다. 댓글주세요. 가볍게 타기 좋은 자전거 입니다.  </p>
-          </div>
-          
-          <div className={detail.line}></div>
-          <div className={detail.btn}>
-            <button className={detail.btn_buy}>바로 구매</button>
-          </div>
-        </section>
-      </main>
-    </>
+    <DetailContainer>
+      <DetailItem>
+      <ItemImage src={`../assets/img/${item.image}`} alt={item.title} />
+        <ItemInfo>
+          <ItemTitle>{item.title}</ItemTitle>
+          <ItemPrice>{item.price}원</ItemPrice>
+          <ItemDescription>{item.description}</ItemDescription>
+          <ItemCounter>
+            <ItemCountBtn onClick={handleMinus}>
+              <AiOutlineMinus />
+            </ItemCountBtn>
+            <ItemCount>{quantity}</ItemCount>
+            <ItemCountBtn onClick={handlePlus}>
+              <AiOutlinePlus />
+            </ItemCountBtn>
+          </ItemCounter>
+          <AddBtn>장바구니에 추가</AddBtn>
+        </ItemInfo>
+      </DetailItem>
+    </DetailContainer>
   );
 };
+
+const DetailContainer = styled.div`
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DetailItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 600px;
+  margin-top: 50px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+`;
+
+const ItemImage = styled.img`
+  width: 40%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 0 0 10px;
+`;
+
+const ItemInfo = styled.div`
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+`;
+
+const ItemTitle = styled.h1`
+  font-size: 3rem;
+  margin-bottom: 20px;
+`;
+
+const ItemPrice = styled.h2`
+  font-size: 2rem;
+  margin-bottom: 20px;
+`;
+
+const ItemDescription = styled.p`
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+`;
+
+const ItemCounter = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const ItemCountBtn = styled.button`
+  font-size: 2rem;
+  padding: 0px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+`;
+
+const ItemCount = styled.span`
+  font-size: 2rem;
+  margin: 0px 20px;
+`;
 export default DetailPage;

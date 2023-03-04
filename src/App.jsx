@@ -60,7 +60,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Main />} />
             <Route exact path="/write" element={<WritingPages />} />
-            <Route exact path="/detail" element={<DetailPage />} />
+            <Route exact path="/detai1/:id" element={<DetailPage />} />
           </Routes>
         </BrowserRouter>
       </DataContext.Provider>
