@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { DataContext, SignUpContext } from "../../App";
-import "./signIn.css";
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { DataContext, SignUpContext } from '../../App';
+import './signIn.css';
 
 export default function SignIn() {
   const { isLogin, setIsLogin } = useContext(DataContext);
@@ -12,10 +12,10 @@ export default function SignIn() {
 
   const onLogin = () => {
     if (email === curEmail && pwd === curPwd) {
-      navigate("/");
+      navigate('/');
       setIsLogin(true);
     } else {
-      alert("아이디 또는 패스워드가 일치하지 않습니다!");
+      alert('아이디 또는 패스워드가 일치하지 않습니다!');
       return;
     }
   };
@@ -24,7 +24,7 @@ export default function SignIn() {
     <div className="signInDIv">
       <form className="form2">
         <div className="titleWrap">
-          <img src={require("./Daangeun_Logo_Color_RGB.png")} />{" "}
+          <img src={require('./Daangeun_Logo_Color_RGB.png')} />{' '}
         </div>
         <div className="inputBox">
           <div className="inputName">
@@ -65,7 +65,7 @@ export default function SignIn() {
           아직 회원이 아니세요?
           <span
             className="movetoSignupButton"
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate('/signup')}
           >
             회원가입
           </span>

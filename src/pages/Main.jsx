@@ -5,7 +5,6 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import MainItem from '../components/main/MainItem';
 import { Link } from 'react-router-dom';
 
-
 const Main = () => {
   const { isLogin } = useContext(DataContext);
 

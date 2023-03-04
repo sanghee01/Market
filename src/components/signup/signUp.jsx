@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { DataContext, SignUpContext } from "../../App";
-import "./signUp.css";
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { DataContext, SignUpContext } from '../../App';
+import './signUp.css';
 
 export default function SignUp() {
   const {
@@ -19,12 +19,12 @@ export default function SignUp() {
 
   const navigate = useNavigate();
 
-  const [isPasswordMatch, setIsPasswordMatch] = useState("");
+  const [isPasswordMatch, setIsPasswordMatch] = useState('');
   useEffect(() => {
     if (pwdc && pwd !== pwdc) {
-      setIsPasswordMatch("비밀번호가 일치하지 않습니다");
+      setIsPasswordMatch('비밀번호가 일치하지 않습니다');
     } else {
-      setIsPasswordMatch("");
+      setIsPasswordMatch('');
     }
   }, [pwd, pwdc]);
 
@@ -39,7 +39,7 @@ export default function SignUp() {
 
   const onSignupSubmit = (e) => {
     e.preventDefault();
-    navigate("/login", { replace: true });
+    navigate('/login', { replace: true });
   };
 
   return (
