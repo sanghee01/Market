@@ -11,7 +11,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (name) {
-      const Posts = items.filter((item) => item.writer === name);
+      const Posts = data.filter((item) => item.writer === name);
       setMyPost(Posts);
     }
   }, [name]);
@@ -58,7 +58,7 @@ const Profile = () => {
         </MyPostItemsDiv>
       </MyPostDiv>
       <NewBtnContainer>
-        <NewLink to="/write">
+        <NewLink to='/write'>
           <AiOutlinePlus />
         </NewLink>
       </NewBtnContainer>
