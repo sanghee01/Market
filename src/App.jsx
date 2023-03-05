@@ -60,7 +60,7 @@ function App() {
       price: '5,000',
       img: 'assets/img/image05.jpg',
       desc: '팝니다 댓글주세요',
-      writer: '홍길동',
+      writer: '이길동',
     },
   ]);
 
