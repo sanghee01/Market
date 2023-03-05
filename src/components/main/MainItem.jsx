@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { DataContext } from '../../App';
+import { DataContext, DetailContext } from '../../App';
+import { Link } from 'react-router-dom';
 
 const MainItem = () => {
   const { items } = useContext(DataContext);
+  const { detailData, setDetailData, detailFilter } = useContext(DetailContext);
 
   return (
     <MainItemDiv>
@@ -15,16 +17,23 @@ const MainItem = () => {
             .map((item) => {
               const { id, title, img, price, category } = item;
               return (
-                <ItemArticle key={id}>
-                  <ItemImg src={img} alt={title} />
-                  <div>
-                    <header>
-                      <p>{title}</p>
-                    </header>
-                    <h4>{price}원</h4>
-                    <Category>{category}</Category>
-                  </div>
-                </ItemArticle>
+                <DetailLink key={id} to="/detail">
+                  <ItemArticle
+                    key={id}
+                    onClick={() => {
+                      detailFilter(item);
+                    }}
+                  >
+                    <ItemImg src={img} alt={title} />
+                    <div>
+                      <header>
+                        <p>{title}</p>
+                      </header>
+                      <h4>{price}원</h4>
+                      <Category>{category}</Category>
+                    </div>
+                  </ItemArticle>
+                </DetailLink>
               );
             })
             .sort((a, b) => b.key - a.key)
@@ -61,6 +70,11 @@ const NoitemNotice = styled.div`
 const ItemArticle = styled.article`
   cursor: pointer;
   height: 400px;
+`;
+
+const DetailLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
 
 const ItemImg = styled.img`
