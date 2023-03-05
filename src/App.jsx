@@ -10,6 +10,7 @@ import SignUp from './components/signup/signUp';
 import styled from 'styled-components';
 import Footer from './components/common/Footer';
 import Profile from './profile/Profile';
+import Edit from './pages/Edit';
 
 export const DataContext = createContext();
 export const SignUpContext = createContext();
@@ -100,6 +101,30 @@ function App() {
     );
   };
 
+  const onEdit = (
+    targetId,
+    editTitle,
+    editCategory,
+    editPrice,
+    editImg,
+    editDesc
+  ) => {
+    setData(
+      data.map((item) =>
+        item.id === targetId
+          ? {
+              ...item,
+              title: editTitle,
+              category: editCategory,
+              price: editPrice,
+              img: editImg,
+              desc: editDesc,
+            }
+          : item
+      )
+    );
+  };
+
   const [detailData, setDetailData] = useState({
     id: null,
     title: '',
@@ -134,6 +159,7 @@ function App() {
           isLogin,
           setIsLogin,
           allCategories,
+          onEdit,
         }}
       >
         <SignUpContext.Provider
@@ -162,6 +188,7 @@ function App() {
                 <Route exact path='/signup' element={<SignUp />} />
                 <Route exact path='/profile' element={<Profile />} />
                 <Route exact path='/detail' element={<DetailPage />} />
+                <Route exact path='/edit' element={<Edit />} />
               </Routes>
               <Footer />
             </BrowserRouter>
