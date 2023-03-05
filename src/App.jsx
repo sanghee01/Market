@@ -75,7 +75,6 @@ function App() {
 
   useEffect(() => {
     setItems(data);
-    console.log(data);
   }, [data]);
 
   const filterItem = (category) => {
@@ -126,11 +125,11 @@ function App() {
           <BrowserRouter>
             <Nav onSearch={onSearch} />
             <Routes>
-              <Route exact path="/" element={<Main />} />
-              <Route exact path="/write" element={<WritingPages />} />
-              <Route exact path="/login" element={<SignIn />} />
-              <Route exact path="/signup" element={<SignUp />} />
-              <Route exact path="/profile" element={<Profile />} />
+              <Route exact path='/' element={<Main />} />
+              <Route exact path='/write' element={<WritingPages />} />
+              <Route exact path='/login' element={<SignIn />} />
+              <Route exact path='/signup' element={<SignUp />} />
+              <Route path='/profile' element={<Profile />} />
             </Routes>
             <Footer />
           </BrowserRouter>
