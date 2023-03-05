@@ -13,6 +13,7 @@ import Profile from './profile/Profile';
 
 export const DataContext = createContext();
 export const SignUpContext = createContext();
+export const DetailContext = createContext();
 
 function App() {
   const [data, setData] = useState([
@@ -23,6 +24,7 @@ function App() {
       price: '120,000',
       img: 'assets/img/image01.jpg',
       desc: '올해 샀구 한번도 안뜯은 멀쩡한 아이폰 팜',
+      writer: '홍길동',
     },
     {
       id: 2,
@@ -31,6 +33,7 @@ function App() {
       price: '1,000',
       img: 'assets/img/image02.jpg',
       desc: '사가세요',
+      writer: '홍길동',
     },
     {
       id: 3,
@@ -39,6 +42,7 @@ function App() {
       price: '2,000',
       img: 'assets/img/image03.jpg',
       desc: '드르렁 책입니다',
+      writer: '홍길동',
     },
     {
       id: 4,
@@ -47,6 +51,7 @@ function App() {
       price: '50,000',
       img: 'assets/img/image04.jpg',
       desc: '싸게 처분함',
+      writer: '홍길동',
     },
     {
       id: 5,
@@ -55,6 +60,7 @@ function App() {
       price: '5,000',
       img: 'assets/img/image05.jpg',
       desc: '팝니다 댓글주세요',
+      writer: '홍길동',
     },
   ]);
 
@@ -95,6 +101,27 @@ function App() {
     );
   };
 
+  const [detailData, setDetailData] = useState({
+    id: null,
+    title: '',
+    category: '',
+    price: '',
+    img: '',
+    desc: '',
+    writer: '',
+  });
+
+  const detailFilter = (item) => {
+    setDetailData({
+      id: item.id,
+      title: item.title,
+      category: item.category,
+      price: item.price,
+      img: item.img,
+      desc: item.desc,
+      writer: item.writer,
+    });
+  };
   return (
     <div>
       <GlobalStyle />
@@ -124,17 +151,22 @@ function App() {
             setAge,
           }}
         >
-          <BrowserRouter>
-            <Nav onSearch={onSearch} />
-            <Routes>
-              <Route exact path="/" element={<Main />} />
-              <Route exact path="/write" element={<WritingPages />} />
-              <Route exact path="/login" element={<SignIn />} />
-              <Route exact path="/signup" element={<SignUp />} />
-              <Route exact path="/profile" element={<Profile />} />
-            </Routes>
-            <Footer />
-          </BrowserRouter>
+          <DetailContext.Provider
+            value={{ detailData, setDetailData, detailFilter }}
+          >
+            <BrowserRouter>
+              <Nav onSearch={onSearch} />
+              <Routes>
+                <Route exact path="/" element={<Main />} />
+                <Route exact path="/write" element={<WritingPages />} />
+                <Route exact path="/login" element={<SignIn />} />
+                <Route exact path="/signup" element={<SignUp />} />
+                <Route exact path="/profile" element={<Profile />} />
+                <Route exact path="/detail" element={<DetailPage />} />
+              </Routes>
+              <Footer />
+            </BrowserRouter>
+          </DetailContext.Provider>
         </SignUpContext.Provider>
       </DataContext.Provider>
     </div>
