@@ -3,16 +3,20 @@
   padding: 0;
 }
 
-form {
-  position: absolute;
+.signInDIv {
+  display: flex;
+  justify-content: center;
+  height: 800px;
+}
+
+.form2 {
+  margin-top: 150px;
   width: 100%;
   max-width: 500px;
+  height: 500px;
   padding: 20px;
   left: 50%;
-  transform: translate(-50%, 0);
   background-color: #f7f7f7;
-  display: flex;
-  flex-direction: column;
   border-radius: 20px;
 }
 
@@ -23,13 +27,6 @@ form {
 
 .inputBox {
   margin-bottom: 30px;
-}
-
-.inputName {
-  font-size: 12px;
-  font-weight: 600;
-  color: #262626;
-  margin-bottom: 4px;
 }
 
 .inputField {
@@ -68,6 +65,16 @@ form {
   color: red;
 }
 
+.movetoSignup {
+  color: gray;
+  font-size: 12px;
+  text-align: center;
+}
+
+.movetoSignupButton {
+  text-decoration: underline;
+  cursor: pointer;
+}
 img {
   width: 300px;
   margin: 0px;

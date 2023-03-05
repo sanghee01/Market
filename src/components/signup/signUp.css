@@ -3,17 +3,27 @@
   padding: 0;
 }
 
-form {
-  position: absolute;
+.signUpDIv {
+  display: flex;
+  justify-content: center;
+  height: 1000px;
+}
+
+.form1 {
+  margin-top: 150px;
   width: 100%;
   max-width: 500px;
-  padding: 20px;
+  height: 620px;
+  padding: 30px;
   left: 50%;
-  transform: translate(-50%, 0);
   background-color: #f7f7f7;
-  display: flex;
-  flex-direction: column;
   border-radius: 20px;
+}
+
+#PasswordNotMatch {
+  margin-left: 5px;
+  font-size: 10px;
+  color: red;
 }
 
 .titleWrap {
@@ -64,8 +74,18 @@ form {
   border-radius: 16px;
 }
 
+.submit:disabled {
+  background-color: lightgray;
+}
+
 .required {
   margin-left: 2px;
   font-size: small;
   color: red;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

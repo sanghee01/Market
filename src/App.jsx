@@ -1,12 +1,18 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './pages/Main';
 import GlobalStyle from './styles/GlobalStyles';
+import Nav from './components/common/Nav';
 import WritingPages from './pages/WritingPage';
 import DetailPage from './pages/DetailPage';
-
+import SignIn from './components/login/signIn';
+import SignUp from './components/signup/signUp';
+import styled from 'styled-components';
+import Footer from './components/common/Footer';
+import Profile from './profile/Profile';
 
 export const DataContext = createContext();
+export const SignUpContext = createContext();
 
 function App() {
   const [data, setData] = useState([
@@ -28,11 +34,11 @@ function App() {
     },
     {
       id: 3,
-      title: '송강 패딩',
-      category: '의류',
-      price: '300,000',
+      title: '드르렁',
+      category: '도서',
+      price: '2,000',
       img: 'assets/img/image03.jpg',
-      desc: '송강이 입었던 패딩팝니다',
+      desc: '드르렁 책입니다',
     },
     {
       id: 4,
@@ -52,19 +58,87 @@ function App() {
     },
   ]);
 
+  const allCategories = [
+    { id: 1, text: '전체보기' },
+    { id: 2, text: '전자기기' },
+    { id: 3, text: '가구' },
+    { id: 4, text: '도서' },
+    { id: 5, text: '기타' },
+  ];
+
+  const [items, setItems] = useState(data);
+  const [isLogin, setIsLogin] = useState(false);
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [pwdc, setPwdc] = useState('');
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+
+  useEffect(() => {
+    setItems(data);
+    console.log(data);
+  }, [data]);
+
+  const filterItem = (category) => {
+    if (category === '전체보기') {
+      setItems(data);
+    } else {
+      setItems(data.filter((item) => item.category === category));
+    }
+  };
+
+  const onSearch = (text) => {
+    setItems(
+      data.filter((item) =>
+        item.title.toLowerCase().includes(text.toLowerCase())
+      )
+    );
+  };
+
   return (
     <div>
       <GlobalStyle />
-      <DataContext.Provider value={{ data, setData }}>
-        <BrowserRouter>
-          <Routes>
-            <Route exact path="/" element={<Main />} />
-            <Route exact path="/write" element={<WritingPages />} />
-            <Route exact path="/detai1/:id" element={<DetailPage />} />
-          </Routes>
-        </BrowserRouter>
+      <DataContext.Provider
+        value={{
+          data,
+          setData,
+          filterItem,
+          items,
+          setItems,
+          isLogin,
+          setIsLogin,
+          allCategories,
+        }}
+      >
+        <SignUpContext.Provider
+          value={{
+            email,
+            setEmail,
+            pwd,
+            setPwd,
+            pwdc,
+            setPwdc,
+            name,
+            setName,
+            age,
+            setAge,
+          }}
+        >
+          <BrowserRouter>
+            <Nav onSearch={onSearch} />
+            <Routes>
+              <Route exact path="/" element={<Main />} />
+              <Route exact path="/write" element={<WritingPages />} />
+              <Route exact path="/login" element={<SignIn />} />
+              <Route exact path="/signup" element={<SignUp />} />
+              <Route exact path="/profile" element={<Profile />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        </SignUpContext.Provider>
       </DataContext.Provider>
     </div>
   );
 }
+
 export default App;

@@ -1,12 +1,16 @@
-import React, { useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { DataContext, SignUpContext } from '../../App';
 
-const Nav = ({ categories, filterItem, onSearch }) => {
+const Nav = ({ onSearch }) => {
   const [text, setText] = useState('');
   const navigate = useNavigate();
-  const [btnIndex, setBtnIndex] = useState(0);
-  const [isLogIn, setIsLogIn] = useState(true);
+  const [btnIndex, setBtnIndex] = useState(1);
+
+  const { filterItem, isLogin, setIsLogin, allCategories } =
+    useContext(DataContext);
+  const { name } = useContext(SignUpContext);
 
   const onSearchItem = useCallback(
     (e) => {
@@ -19,30 +23,31 @@ const Nav = ({ categories, filterItem, onSearch }) => {
 
   const onMain = useCallback(() => {
     filterItem('전체보기');
-    setBtnIndex(0);
+    setBtnIndex(1);
     navigate('/');
   }, [filterItem, navigate]);
 
   const onToggle = () => {
-    setIsLogIn(!isLogIn);
+    setIsLogin(!isLogin);
+    navigate('/');
   };
 
   return (
     <NavBar>
       <NavHeader>
-        <Logo src="assets/img/logo.png" alt="logo" onClick={onMain} />
+        <Logo src="assets/img/Logo1.jpg" alt="logo" onClick={onMain} />
         <NavBtnWrap>
-          {categories.map((category, index) => {
+          {allCategories.map((category) => {
             return (
               <NavBtn
                 onClick={() => {
-                  filterItem(category);
-                  setBtnIndex(index);
+                  filterItem(category.text);
+                  setBtnIndex(category.id);
                 }}
-                key={index}
-                className={btnIndex === index && 'active_btn'}
+                key={category.id}
+                className={btnIndex === category.id && 'active_btn'}
               >
-                {category}
+                {category.text}
               </NavBtn>
             );
           })}
@@ -57,16 +62,21 @@ const Nav = ({ categories, filterItem, onSearch }) => {
           />
           <NavInputBtn type="submit">검색하기</NavInputBtn>
         </form>
-        <NavLoginBtnWrap>
-          {isLogIn ? (
-            <>
-              <span>OO님 환영합니다</span>
-              <NavLogoutBtn>로그아웃</NavLogoutBtn>
-            </>
+        <div>
+          {isLogin ? (
+            <NavLogOutBtnWrap>
+              <WelcomeText>
+                <ProfileLink to="/profile">{name}</ProfileLink>님 환영합니다
+              </WelcomeText>
+              <NavLogoutBtn onClick={onToggle}>로그아웃</NavLogoutBtn>
+            </NavLogOutBtnWrap>
           ) : (
-            <>""</>
+            <NavLoginBtnWrap>
+              <NavLoginLink to="/login">로그인</NavLoginLink>
+              <NavSignUpLink to="/signup">회원가입</NavSignUpLink>
+            </NavLoginBtnWrap>
           )}
-        </NavLoginBtnWrap>
+        </div>
       </NavHeader>
     </NavBar>
   );
@@ -85,10 +95,12 @@ const NavHeader = styled.div`
   align-items: center;
   justify-content: space-around;
   padding: 1rem 50px;
+  height: 70px;
 `;
 
 const Logo = styled.img`
-  height: 40px;
+  width: 150px;
+  height: 60px;
   cursor: pointer;
   margin-left: 100px;
 `;
@@ -143,18 +155,54 @@ const NavInputBtn = styled.button`
   }
 `;
 
-const NavLoginBtnWrap = styled.div`
+const NavLogOutBtnWrap = styled.div`
   display: grid;
+  width: 140px;
+`;
+
+const WelcomeText = styled.span`
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 5px;
+`;
+
+const ProfileLink = styled(Link)`
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
 `;
 
 const NavLogoutBtn = styled.button`
   background: none;
-
   width: 80px;
   font-size: 13px;
   border: none;
   margin: 0 auto;
   cursor: pointer;
   color: gray;
+`;
+
+const NavLoginBtnWrap = styled.div`
+  width: 140px;
+`;
+
+const NavLoginLink = styled(Link)`
+  background: none;
+  color: black;
+  border: none;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-right: 15px;
+`;
+
+const NavSignUpLink = styled(Link)`
+  background: none;
+  border: none;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: black;
 `;
 export default Nav;
