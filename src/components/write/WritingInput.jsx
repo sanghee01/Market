@@ -10,6 +10,7 @@ const WritingInput = ({
   onKeyUp,
   required,
   accept,
+  value,
 }) => {
   const inputUI = {
     input: (
@@ -21,17 +22,19 @@ const WritingInput = ({
         onChange={onChange}
         accept={accept}
         onKeyUp={onKeyUp}
+        value={value}
       />
     ),
     textarea: (
       <WriteTextarea
         name={name}
         onChange={onChange}
-        placeholder="상품 설명 및 거래방법을 작성해주세요."
+        placeholder='상품 설명 및 거래방법을 작성해주세요.'
+        value={value}
       ></WriteTextarea>
     ),
     select: (
-      <WriteSelect name={name} onChange={onChange}>
+      <WriteSelect name={name} onChange={onChange} value={value}>
         <option>카테고리를 선택하세요.</option>
         <option>가구</option>
         <option>도서</option>

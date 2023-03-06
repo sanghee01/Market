@@ -35,7 +35,7 @@ const Nav = ({ onSearch }) => {
   return (
     <NavBar>
       <NavHeader>
-        <Logo src="assets/img/Logo1.jpg" alt="logo" onClick={onMain} />
+        <Logo src='assets/img/Logo1.jpg' alt='logo' onClick={onMain} />
         <NavBtnWrap>
           {allCategories.map((category) => {
             return (
@@ -55,25 +55,25 @@ const Nav = ({ onSearch }) => {
 
         <form onSubmit={onSearchItem}>
           <NavInput
-            type="text"
+            type='text'
             value={text}
             placeholder={'물품을 검색해보세요'}
             onChange={(e) => setText(e.target.value)}
           />
-          <NavInputBtn type="submit">검색하기</NavInputBtn>
+          <NavInputBtn type='submit'>검색하기</NavInputBtn>
         </form>
         <div>
           {isLogin ? (
             <NavLogOutBtnWrap>
               <WelcomeText>
-                <ProfileLink to="/profile">{name}</ProfileLink>님 환영합니다
+                <ProfileLink to='/profile'>{name}</ProfileLink>님 환영합니다
               </WelcomeText>
               <NavLogoutBtn onClick={onToggle}>로그아웃</NavLogoutBtn>
             </NavLogOutBtnWrap>
           ) : (
             <NavLoginBtnWrap>
-              <NavLoginLink to="/login">로그인</NavLoginLink>
-              <NavSignUpLink to="/signup">회원가입</NavSignUpLink>
+              <NavLoginLink to='/login'>로그인</NavLoginLink>
+              <NavSignUpLink to='/signup'>회원가입</NavSignUpLink>
             </NavLoginBtnWrap>
           )}
         </div>
@@ -128,6 +128,7 @@ const NavBtn = styled.div`
     :hover: none;
   }
 `;
+
 const NavInput = styled.input`
   width: 280px;
   height: 40px;

@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { DataContext, SignUpContext } from '../App';
+import { Link } from 'react-router-dom';
+import { DataContext, DetailContext, SignUpContext } from '../App';
 
 const Profile = () => {
   const { data, items, setItems, isLogin } = useContext(DataContext);
   const { name, email, age } = useContext(SignUpContext);
+  const { detailFilter } = useContext(DetailContext);
   const [myPost, setMyPost] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (name) {
-      const Posts = items.filter((item) => item.writer === name);
+      const Posts = data.filter((item) => item.writer === name);
       setMyPost(Posts);
     }
   }, [name]);
@@ -42,7 +45,12 @@ const Profile = () => {
             .map((item) => {
               const { id, title, img, price, category } = item;
               return (
-                <MyPostItemArticle key={id}>
+                <MyPostItemArticle
+                  key={id}
+                  onClick={() => {
+                    navigate('/detail'), detailFilter(item);
+                  }}
+                >
                   <MyPostItemImg src={img} alt={title} />
                   <div>
                     <header>
@@ -58,7 +66,7 @@ const Profile = () => {
         </MyPostItemsDiv>
       </MyPostDiv>
       <NewBtnContainer>
-        <NewLink to="/write">
+        <NewLink to='/write'>
           <AiOutlinePlus />
         </NewLink>
       </NewBtnContainer>

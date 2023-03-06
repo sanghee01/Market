@@ -12,7 +12,7 @@ const DetailPage = () => {
   const navigate = useNavigate();
 
   const onDetailEdit = () => {
-    navigate('/write');
+    navigate(`/edit`);
   };
 
   const onDetailDelete = () => {

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { DataContext, SignUpContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 
-const WritingPage = () => {
-  const { data, setData } = useContext(DataContext);
+const WritingPage = ({ isEdit, curItem }) => {
+  const { data, setData, onEdit } = useContext(DataContext);
   const { name } = useContext(SignUpContext);
   const navigate = useNavigate();
   const [writeInput, setWriteInput] = useState({
@@ -39,7 +39,6 @@ const WritingPage = () => {
 
   const onSaveFileImage = (e) => {
     setFileImage(URL.createObjectURL(e.target.files[0]));
-    console.log(e.target.value);
   };
 
   const onChangeWriteInput = (e) => {
@@ -51,20 +50,51 @@ const WritingPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setData([
-      ...data,
-      {
-        id: data[data.length - 1].id + 1,
-        title: writeInput.title,
-        category: writeInput.category,
-        price: price,
-        img: fileImage,
-        desc: writeInput.desc,
-        writer: name,
-      },
-    ]);
-    navigate('/');
+
+    if (
+      window.confirm(
+        !isEdit ? '새 글을 작성하시겠습니까?' : '글을 수정하시겠습니까?'
+      )
+    ) {
+      if (!isEdit) {
+        setData([
+          ...data,
+          {
+            id: data[data.length - 1].id + 1,
+            title: writeInput.title,
+            category: writeInput.category,
+            price: price,
+            img: fileImage,
+            desc: writeInput.desc,
+            writer: name,
+          },
+        ]);
+      } else {
+        onEdit(
+          curItem.id,
+          writeInput.title,
+          writeInput.category,
+          price,
+          fileImage,
+          writeInput.desc
+        );
+      }
+
+      navigate('/');
+    }
   };
+
+  useEffect(() => {
+    if (isEdit) {
+      setWriteInput({
+        title: curItem.title,
+        category: curItem.category,
+        desc: curItem.desc,
+      });
+      setPrice(curItem.price);
+      setFileImage(curItem.img);
+    }
+  }, [isEdit, curItem]);
 
   const onPriceComma = (e) => {
     e.target.value = String(e.target.value)
@@ -76,56 +106,62 @@ const WritingPage = () => {
   return (
     <>
       <WriteContainer>
-        <h3>내 물건 팔기</h3>
+        {!isEdit ? <h3>내 물건 팔기</h3> : <h3>내 게시글 수정</h3>}
         <hr />
         <WriteForm onSubmit={onSubmit}>
           <WriteImgBox>
             <WritingInput
-              title="이미지"
-              division="input"
-              name="image"
-              type="file"
-              accept="image/*"
+              title='이미지'
+              division='input'
+              name='image'
+              type='file'
+              accept='image/*'
               onChange={onSaveFileImage}
-              required
             />
             {fileImage && <WriteImg src={fileImage} />}
           </WriteImgBox>
           <WritingInput
-            title="제목"
-            division="input"
-            name="title"
-            type="text"
-            placeholder="제목을 입력하세요."
+            title='제목'
+            division='input'
+            name='title'
+            type='text'
+            placeholder='제목을 입력하세요.'
             onChange={onChangeWriteInput}
             required
+            value={writeInput.title}
           />
           <WritingInput
-            title="카테고리"
-            division="select"
-            name="category"
+            title='카테고리'
+            division='select'
+            name='category'
             onChange={onChangeWriteInput}
             required
+            value={writeInput.category}
           />
           <WritingInput
-            title="가격"
-            division="input"
-            name="price"
-            type="text"
-            placeholder="가격을 입력하세요."
-            onChange={onChangeWriteInput}
-            onKeyUp={onPriceComma}
+            title='가격'
+            division='input'
+            name='price'
+            type='text'
+            placeholder='가격을 입력하세요.'
+            onChange={onPriceComma}
             required
+            value={price}
           />
           <WritingInput
-            title="자세한 설명"
-            division="textarea"
-            name="desc"
+            title='자세한 설명'
+            division='textarea'
+            name='desc'
             onChange={onChangeWriteInput}
             required
             textarea
+            value={writeInput.desc}
           />
-          <WriteSubmitBtn disabled={isNotCorrect}>작성완료</WriteSubmitBtn>
+          {!isEdit ? (
+            <WriteSubmitBtn disabled={isNotCorrect}>작성완료</WriteSubmitBtn>
+          ) : (
+            <WriteSubmitBtn>수정완료</WriteSubmitBtn>
+          )}
         </WriteForm>
       </WriteContainer>
     </>

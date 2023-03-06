@@ -10,6 +10,7 @@ import SignUp from './components/signup/signUp';
 import styled from 'styled-components';
 import Footer from './components/common/Footer';
 import Profile from './profile/Profile';
+import Edit from './pages/Edit';
 
 export const DataContext = createContext();
 export const SignUpContext = createContext();
@@ -82,7 +83,6 @@ function App() {
 
   useEffect(() => {
     setItems(data);
-    console.log(data);
   }, [data]);
 
   const filterItem = (category) => {
@@ -97,6 +97,30 @@ function App() {
     setItems(
       data.filter((item) =>
         item.title.toLowerCase().includes(text.toLowerCase())
+      )
+    );
+  };
+
+  const onEdit = (
+    targetId,
+    editTitle,
+    editCategory,
+    editPrice,
+    editImg,
+    editDesc
+  ) => {
+    setData(
+      data.map((item) =>
+        item.id === targetId
+          ? {
+              ...item,
+              title: editTitle,
+              category: editCategory,
+              price: editPrice,
+              img: editImg,
+              desc: editDesc,
+            }
+          : item
       )
     );
   };
@@ -135,6 +159,7 @@ function App() {
           isLogin,
           setIsLogin,
           allCategories,
+          onEdit,
         }}
       >
         <SignUpContext.Provider
@@ -157,12 +182,13 @@ function App() {
             <BrowserRouter>
               <Nav onSearch={onSearch} />
               <Routes>
-                <Route exact path="/" element={<Main />} />
-                <Route exact path="/write" element={<WritingPages />} />
-                <Route exact path="/login" element={<SignIn />} />
-                <Route exact path="/signup" element={<SignUp />} />
-                <Route exact path="/profile" element={<Profile />} />
-                <Route exact path="/detail" element={<DetailPage />} />
+                <Route exact path='/' element={<Main />} />
+                <Route exact path='/write' element={<WritingPages />} />
+                <Route exact path='/login' element={<SignIn />} />
+                <Route exact path='/signup' element={<SignUp />} />
+                <Route exact path='/profile' element={<Profile />} />
+                <Route exact path='/detail' element={<DetailPage />} />
+                <Route exact path='/edit' element={<Edit />} />
               </Routes>
               <Footer />
             </BrowserRouter>
