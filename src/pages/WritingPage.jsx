@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from 'react';
 import WritingInput from '../components/write/WritingInput';
-import styled from 'styled-components';
 import { DataContext, SignUpContext } from '../App';
 import { useNavigate } from 'react-router-dom';
+import * as writeStyle from '../styles/WriteStyle';
 
 const WritingPage = ({ isEdit, curItem }) => {
   const { data, setData, onEdit } = useContext(DataContext);
@@ -105,11 +105,11 @@ const WritingPage = ({ isEdit, curItem }) => {
 
   return (
     <>
-      <WriteContainer>
+      <writeStyle.WriteContainer>
         {!isEdit ? <h3>내 물건 팔기</h3> : <h3>내 게시글 수정</h3>}
         <hr />
-        <WriteForm onSubmit={onSubmit}>
-          <WriteImgBox>
+        <writeStyle.WriteForm onSubmit={onSubmit}>
+          <writeStyle.WriteImgBox>
             <WritingInput
               title='이미지'
               division='input'
@@ -119,7 +119,7 @@ const WritingPage = ({ isEdit, curItem }) => {
               onChange={onSaveFileImage}
             />
             {fileImage && <WriteImg src={fileImage} />}
-          </WriteImgBox>
+          </writeStyle.WriteImgBox>
           <WritingInput
             title='제목'
             division='input'
@@ -158,56 +158,16 @@ const WritingPage = ({ isEdit, curItem }) => {
             value={writeInput.desc}
           />
           {!isEdit ? (
-            <WriteSubmitBtn disabled={isNotCorrect}>작성완료</WriteSubmitBtn>
+            <writeStyle.WriteSubmitBtn disabled={isNotCorrect}>
+              작성완료
+            </writeStyle.WriteSubmitBtn>
           ) : (
-            <WriteSubmitBtn>수정완료</WriteSubmitBtn>
+            <writeStyle.WriteSubmitBtn>수정완료</writeStyle.WriteSubmitBtn>
           )}
-        </WriteForm>
-      </WriteContainer>
+        </writeStyle.WriteForm>
+      </writeStyle.WriteContainer>
     </>
   );
 };
-
-const WriteContainer = styled.div`
-  height: 140vh;
-  width: 40vw;
-  margin: 0 auto;
-  margin-top: 170px;
-`;
-
-const WriteImgBox = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const WriteImg = styled.img`
-  margin: 30px;
-  height: 30%;
-  width: 30%;
-`;
-const WriteForm = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const WriteSubmitBtn = styled.button`
-  cursor: pointer;
-  margin-top: 30px;
-  padding: 14px;
-  background-color: #ff8a3d;
-  border-radius: 30px;
-  border: none;
-  font-size: 15px;
-  font-weight: bold;
-  color: white;
-  :hover {
-    background-color: #ff8b3dcf;
-  }
-  :disabled {
-    background-color: lightgray;
-  }
-
-  transition: all 0.2s;
-`;
 
 export default WritingPage;
