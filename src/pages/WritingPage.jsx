@@ -118,7 +118,7 @@ const WritingPage = ({ isEdit, curItem }) => {
               accept='image/*'
               onChange={onSaveFileImage}
             />
-            {fileImage && <WriteImg src={fileImage} />}
+            {fileImage && <writeStyle.WriteImg src={fileImage} />}
           </writeStyle.WriteImgBox>
           <WritingInput
             title='제목'
