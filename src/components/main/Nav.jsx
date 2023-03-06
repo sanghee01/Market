@@ -1,10 +1,10 @@
-import React, { useCallback, useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { DataContext, SignUpContext } from "../../App";
+import React, { useCallback, useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { DataContext, SignUpContext } from '../../App';
 
 const Nav = ({ onSearch }) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const navigate = useNavigate();
   const [btnIndex, setBtnIndex] = useState(1);
 
@@ -16,15 +16,15 @@ const Nav = ({ onSearch }) => {
     (e) => {
       e.preventDefault();
       onSearch(text);
-      setText("");
+      setText('');
     },
     [onSearch, text]
   );
 
   const onMain = useCallback(() => {
-    filterItem("전체보기");
+    filterItem('전체보기');
     setBtnIndex(1);
-    navigate("/");
+    navigate('/');
   }, [filterItem, navigate]);
 
   const onToggle = () => {
@@ -44,7 +44,7 @@ const Nav = ({ onSearch }) => {
                   setBtnIndex(category.id);
                 }}
                 key={category.id}
-                className={btnIndex === category.id && "active_btn"}
+                className={btnIndex === category.id && 'active_btn'}
               >
                 {category.text}
               </NavBtn>
@@ -56,7 +56,7 @@ const Nav = ({ onSearch }) => {
           <NavInput
             type="text"
             value={text}
-            placeholder={"물품을 검색해보세요"}
+            placeholder={'물품을 검색해보세요'}
             onChange={(e) => setText(e.target.value)}
           />
           <NavInputBtn type="submit">검색하기</NavInputBtn>
@@ -69,10 +69,10 @@ const Nav = ({ onSearch }) => {
             </NavLogOutBtnWrap>
           ) : (
             <NavLoginBtnWrap>
-              <NavLoginBtn onClick={() => navigate("/login")}>
+              <NavLoginBtn onClick={() => navigate('/login')}>
                 로그인
               </NavLoginBtn>
-              <NavSignUpBtn onClick={() => navigate("/signup")}>
+              <NavSignUpBtn onClick={() => navigate('/signup')}>
                 회원가입
               </NavSignUpBtn>
             </NavLoginBtnWrap>

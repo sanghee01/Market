@@ -24,7 +24,7 @@ export default function SignIn() {
     <div className="signInDIv">
       <form className="form2">
         <div className="titleWrap">
-          <img src={require('./Daangeun_Logo_Color_RGB.png')} />{' '}
+          <img src="assets/img/Logo2.png" />{' '}
         </div>
         <div className="inputBox">
           <div className="inputName">
