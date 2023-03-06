@@ -77,5 +77,6 @@
 }
 img {
   width: 300px;
-  margin: 0px;
+  margin: auto;
+  text-align: center;
 }
