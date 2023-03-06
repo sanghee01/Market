@@ -27,27 +27,55 @@ const DetailPage = () => {
 
   return (
     <DetailContainer>
-      <img src={img} alt={title} />
-      <div>
-        <h1>{title}</h1>
-        <span>{writer}</span>
-        <span>{category}</span>
-        <span>{price}원</span>
-        <p>{desc}</p>
-      </div>
+      <DetailBox>
+        <DetailInfoBox>
+          <h1>{title}</h1>
+          <span>작성자: {writer}</span>
+          <span>카테고리: {category}</span>
+          <span>가격: {price}원</span>
+          <DetailImage src={img} alt={title} />
+          <p>{desc}</p>
+        </DetailInfoBox>
 
-      {isLogin === true && writer === name && (
-        <div>
-          <button onClick={onDetailEdit}>수정</button>
-          <button onClick={onDetailDelete}>삭제</button>
-        </div>
-      )}
+        {isLogin === true && writer === name && (
+          <div>
+            <DetailBtn onClick={onDetailEdit}>수정</DetailBtn>
+            <DetailBtn onClick={onDetailDelete}>삭제</DetailBtn>
+          </div>
+        )}
+      </DetailBox>
     </DetailContainer>
   );
 };
-
 const DetailContainer = styled.div`
-  margin-top: 200px;
+  padding-top: 180px;
+  height: 140vh;
+  background-color: #fffafa;
+`;
+const DetailBox = styled.div`
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 50px;
+  width: 40vw;
+  margin: 0 auto;
+`;
+
+const DetailImage = styled.img`
+  margin: auto;
+  margin-bottom: 30px;
+  width: 50%;
+`;
+
+const DetailInfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const DetailBtn = styled.button`
+  padding: 5px;
+  margin-right: 10px;
+  margin-top: 10px;
 `;
 
 export default DetailPage;
