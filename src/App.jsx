@@ -9,7 +9,7 @@ import SignIn from './components/login/signIn';
 import SignUp from './components/signup/signUp';
 import styled from 'styled-components';
 import Footer from './components/common/Footer';
-import Profile from './profile/Profile';
+import Profile from './pages/Profile';
 import Edit from './pages/Edit';
 
 export const DataContext = createContext();
@@ -159,6 +159,7 @@ function App() {
           isLogin,
           setIsLogin,
           allCategories,
+          onSearch,
           onEdit,
         }}
       >
@@ -180,7 +181,7 @@ function App() {
             value={{ detailData, setDetailData, detailFilter }}
           >
             <BrowserRouter>
-              <Nav onSearch={onSearch} />
+              <Nav />
               <Routes>
                 <Route exact path='/' element={<Main />} />
                 <Route exact path='/write' element={<WritingPages />} />

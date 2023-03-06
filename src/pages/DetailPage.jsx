@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 const DetailPage = () => {
-  const { data, setData } = useContext(DataContext);
+  const { data, setData, isLogin } = useContext(DataContext);
   const { detailData } = useContext(DetailContext);
   const { name } = useContext(SignUpContext);
 
@@ -35,7 +35,8 @@ const DetailPage = () => {
         <span>{price}원</span>
         <p>{desc}</p>
       </div>
-      {writer === name && (
+
+      {isLogin === true && writer === name && (
         <div>
           <button onClick={onDetailEdit}>수정</button>
           <button onClick={onDetailDelete}>삭제</button>

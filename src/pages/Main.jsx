@@ -1,62 +1,29 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
 import { DataContext } from '../App';
 import { AiOutlinePlus } from 'react-icons/ai';
 import MainItem from '../components/main/MainItem';
 import { Link } from 'react-router-dom';
-
+import * as M from '../styles/MainStyles';
 
 const Main = () => {
   const { isLogin } = useContext(DataContext);
 
   return (
     <div>
-      <MainContainer>
+      <M.MainContainer>
         <MainItem />
-        <NewBtnContainer>
+        <M.NewBtnContainer>
           {isLogin ? (
-            <NewLink to="/write">
+            <M.NewLink to='/write'>
               <AiOutlinePlus />
-            </NewLink>
+            </M.NewLink>
           ) : (
             <></>
           )}
-        </NewBtnContainer>
-      </MainContainer>
+        </M.NewBtnContainer>
+      </M.MainContainer>
     </div>
   );
 };
-const MainContainer = styled.div`
-  background-color: #fffafa;
-  padding-top: 80px;
-  padding-bottom: 30px;
-`;
-
-const NewBtnContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  position: sticky;
-  bottom: 40px;
-`;
-
-const NewLink = styled(Link)`
-  background-color: #00b493;
-  padding: 15px 20px;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  margin-right: 30px;
-  cursor: pointer;
-  text-decoration: none;
-
-  &:hover {
-    border-radius: 30px;
-    width: 250px;
-
-    ::after {
-      content: ' 내 상품을 등록해보세요';
-    }
-  }
-`;
 
 export default Main;
