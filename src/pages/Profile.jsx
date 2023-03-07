@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { DataContext, DetailContext, SignUpContext } from '../App';
 import * as P from '../styles/ProfileStyles';
 import * as M from '../styles/MainStyles';
 
 const Profile = () => {
-  const { data, items, setItems, isLogin } = useContext(DataContext);
+  const { data } = useContext(DataContext);
   const { name, email, age } = useContext(SignUpContext);
   const { detailFilter } = useContext(DetailContext);
   const [myPost, setMyPost] = useState([]);

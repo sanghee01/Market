@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { DataContext } from '../App';
 import { AiOutlinePlus } from 'react-icons/ai';
 import MainItem from '../components/main/MainItem';
-import { Link } from 'react-router-dom';
 import * as M from '../styles/MainStyles';
 
 const Main = () => {

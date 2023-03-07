@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { DataContext, DetailContext } from '../../App';
-import { Link } from 'react-router-dom';
 import * as M from '../../styles/MainStyles';
 
 const MainItem = () => {
   const { items } = useContext(DataContext);
-  const { detailData, setDetailData, detailFilter } = useContext(DetailContext);
+  const { detailFilter } = useContext(DetailContext);
 
   return (
     <M.MainItemDiv>
