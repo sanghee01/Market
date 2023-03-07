@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import WritingInput from '../components/write/WritingInput';
 import { DataContext, SignUpContext } from '../App';
 import { useNavigate } from 'react-router-dom';
-import * as writeStyle from '../styles/WriteStyle';
+import * as WS from '../styles/WriteStyle';
 
 const WritingPage = ({ isEdit, curItem }) => {
   const { data, setData, onEdit } = useContext(DataContext);
@@ -105,11 +105,11 @@ const WritingPage = ({ isEdit, curItem }) => {
 
   return (
     <>
-      <writeStyle.WriteContainer>
+      <WS.WriteContainer>
         {!isEdit ? <h3>내 물건 팔기</h3> : <h3>내 게시글 수정</h3>}
         <hr />
-        <writeStyle.WriteForm onSubmit={onSubmit}>
-          <writeStyle.WriteImgBox>
+        <WS.WriteForm onSubmit={onSubmit}>
+          <WS.WriteImgBox>
             <WritingInput
               title='이미지'
               division='input'
@@ -118,8 +118,8 @@ const WritingPage = ({ isEdit, curItem }) => {
               accept='image/*'
               onChange={onSaveFileImage}
             />
-            {fileImage && <writeStyle.WriteImg src={fileImage} />}
-          </writeStyle.WriteImgBox>
+            {fileImage && <WS.WriteImg src={fileImage} />}
+          </WS.WriteImgBox>
           <WritingInput
             title='제목'
             division='input'
@@ -158,14 +158,14 @@ const WritingPage = ({ isEdit, curItem }) => {
             value={writeInput.desc}
           />
           {!isEdit ? (
-            <writeStyle.WriteSubmitBtn disabled={isNotCorrect}>
+            <WS.WriteSubmitBtn disabled={isNotCorrect}>
               작성완료
-            </writeStyle.WriteSubmitBtn>
+            </WS.WriteSubmitBtn>
           ) : (
-            <writeStyle.WriteSubmitBtn>수정완료</writeStyle.WriteSubmitBtn>
+            <WS.WriteSubmitBtn>수정완료</WS.WriteSubmitBtn>
           )}
-        </writeStyle.WriteForm>
-      </writeStyle.WriteContainer>
+        </WS.WriteForm>
+      </WS.WriteContainer>
     </>
   );
 };

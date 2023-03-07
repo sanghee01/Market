@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { DataContext, DetailContext, SignUpContext } from '../App';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import * as DS from '../styles/DetailStyles';
 
 const DetailPage = () => {
   const { data, setData, isLogin } = useContext(DataContext);
@@ -26,56 +26,26 @@ const DetailPage = () => {
   };
 
   return (
-    <DetailContainer>
-      <DetailBox>
-        <DetailInfoBox>
+    <DS.DetailContainer>
+      <DS.DetailBox>
+        <DS.DetailInfoBox>
           <h1>{title}</h1>
           <span>작성자: {writer}</span>
           <span>카테고리: {category}</span>
           <span>가격: {price}원</span>
-          <DetailImage src={img} alt={title} />
+          <DS.DetailImage src={img} alt={title} />
           <p>{desc}</p>
-        </DetailInfoBox>
+        </DS.DetailInfoBox>
 
         {isLogin === true && writer === name && (
           <div>
-            <DetailBtn onClick={onDetailEdit}>수정</DetailBtn>
-            <DetailBtn onClick={onDetailDelete}>삭제</DetailBtn>
+            <DS.DetailBtn onClick={onDetailEdit}>수정</DS.DetailBtn>
+            <DS.DetailBtn onClick={onDetailDelete}>삭제</DS.DetailBtn>
           </div>
         )}
-      </DetailBox>
-    </DetailContainer>
+      </DS.DetailBox>
+    </DS.DetailContainer>
   );
 };
-const DetailContainer = styled.div`
-  padding-top: 180px;
-  height: 140vh;
-  background-color: #fffafa;
-`;
-const DetailBox = styled.div`
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 15px;
-  padding: 50px;
-  width: 40vw;
-  margin: 0 auto;
-`;
-
-const DetailImage = styled.img`
-  margin: auto;
-  margin-bottom: 30px;
-  width: 50%;
-`;
-
-const DetailInfoBox = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const DetailBtn = styled.button`
-  padding: 5px;
-  margin-right: 10px;
-  margin-top: 10px;
-`;
 
 export default DetailPage;

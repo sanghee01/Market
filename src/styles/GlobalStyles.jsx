@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
    /* Box sizing rules */
@@ -59,6 +59,14 @@ const GlobalStyle = createGlobalStyle`
     select {
     font: inherit;
     }
+
+    /* input type number no spin */
+    input[type='number']::-webkit-outer-spin-button,
+    input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
 
     /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
     @media (prefers-reduced-motion: reduce) {
