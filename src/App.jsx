@@ -15,6 +15,9 @@ export const DataContext = createContext();
 export const SignUpContext = createContext();
 export const DetailContext = createContext();
 
+// package.json에는 주석을 못 써서 여기에 남깁니다.
+// prettier는 devDepencies에 보통 설치합니다. devDepencies에 대해서 알아보시면 좋을 것 같아요!!
+
 function App() {
   const [data, setData] = useState([
     {
@@ -107,6 +110,9 @@ function App() {
     editPrice,
     editImg,
     editDesc
+    // 함수의 인자를 이렇게 많이 받게 되면 사용하는 부분에서 함수를 보고 인자의 순서를 기억해서 사용해야하는 단점이 있습니다.
+    // 저 같은 경우는 데이터가 많아지면 객체로 묶어서 사용하는 편입니다. 객체로 묶는것이 좋은 방법인지는 모르고 다른 좋은 방법이 있을 수 있습니다.
+    // 확실한 건 인자를 4개 이상 받는 경우는 피해야 하는 걸로 알고있습니다!!
   ) => {
     setData(
       data.map((item) =>
@@ -176,6 +182,7 @@ function App() {
             setAge,
           }}
         >
+        {/* 넘겨야하는 value들이 많은 경우 state들을 객체로 묶는것도 코드를 깔끔하게 하는 방법 중 하나일 수 있습니다! */}
           <DetailContext.Provider
             value={{ detailData, setDetailData, detailFilter }}
           >

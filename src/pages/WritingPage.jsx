@@ -3,6 +3,7 @@ import WritingInput from '../components/write/WritingInput';
 import { DataContext, SignUpContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 import * as WS from '../styles/WriteStyle';
+// 다른 부분에서도 마찬가지로 약어로 사용하고 있는것 같은데 약어는 피하고 바로 이해할 수 있는 이름을 사용하는 것이 좋아보입니다!!
 
 const WritingPage = ({ isEdit, curItem }) => {
   const { data, setData, onEdit } = useContext(DataContext);
@@ -78,6 +79,7 @@ const WritingPage = ({ isEdit, curItem }) => {
           fileImage,
           writeInput.desc
         );
+        // App.jsx에서 말씀드렸듯이 함수 인자들의 순서를 다 기억해서 사용해야 하는 불편함이 있습니다!!
       }
 
       navigate('/');

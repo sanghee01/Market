@@ -49,6 +49,7 @@ const SignIn = () => {
         <SS.MoveToSignUp>
           아직 회원이 아니세요?
           <SS.MoveToSignUpBtn onClick={() => navigate('/signup')}>
+          {/* 해당 기능은 react-router-dom Link 태그를 사용해보면 좋겠네요! */}
             회원가입
           </SS.MoveToSignUpBtn>
         </SS.MoveToSignUp>
